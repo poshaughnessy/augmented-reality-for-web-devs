@@ -100,7 +100,7 @@
         canvasContext = canvas.getContext('2d');
         canvasContext.font = "24px URW Gothic L, Arial, Sans-serif";
 
-        console.log('set up video canvas');
+        //console.log('set up video canvas');
 
         videoCanvas = document.createElement('canvas');
         videoCanvas.id = 'videoCanvas'; // Just for debugging
@@ -207,13 +207,13 @@
         videoScene.add(plane);
         videoScene.add(videoCam);
 
-        setInterval(updateScene, 1000); // XXX Every 15ms?
+        setInterval(updateScene, 33); // XXX Every 15ms?
 
     };
 
     var updateScene = function() {
 
-        console.log('Update');
+        //console.log('Update');
 
         if( video.ended ) {
             video.play();
@@ -242,7 +242,7 @@
 
         var detected = detector.detectMarkerLite(raster, DETECTOR_THRESHOLD);
 
-        console.log('Detected', detected);
+        //console.log('Detected', detected);
 
         // Go through detected markers
         // NB. It seems markers do not need to be defined? It will recognise any image with thick black border?

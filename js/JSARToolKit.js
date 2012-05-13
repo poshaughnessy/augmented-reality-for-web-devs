@@ -8838,8 +8838,8 @@ NyIdMarkerPickup = ASKlass('NyIdMarkerPickup',
   {
     //遠近法のパラメータを計算
     if(!this._perspective_reader.setSourceSquare(i_vertex)){
-      if (window.DEBUG)
-        console.log('NyIdMarkerPickup.pickFromRaster: could not setSourceSquare')
+      //if (window.DEBUG)
+        //console.log('NyIdMarkerPickup.pickFromRaster: could not setSourceSquare')
       return false;
     };
     var reader=image.getGrayPixelReader();
@@ -8849,8 +8849,8 @@ NyIdMarkerPickup = ASKlass('NyIdMarkerPickup',
     //マーカパラメータを取得
     this._perspective_reader.detectThresholdValue(reader,raster_size,th);
     if(!this._perspective_reader.readDataBits(reader,raster_size,th, encoder)){
-      if (window.DEBUG)
-        console.log('NyIdMarkerPickup.pickFromRaster: could not readDataBits')
+      //if (window.DEBUG)
+        //console.log('NyIdMarkerPickup.pickFromRaster: could not readDataBits')
       return false;
     }
     var d=encoder.encode(o_data);
@@ -9421,8 +9421,8 @@ PerspectivePixelReader = ASKlass('PerspectivePixelReader',
     var frq_b=this.getRowFrequency(i_reader,i_raster_size,i_th.rb_y/*-0.5*lydiff*/,i_th.th_h,i_th.th_l,freq_index2);
     //周波数はまとも？
     if((frq_t<0 && frq_b<0) || frq_t==frq_b){
-      if (window.DEBUG)
-        console.log('bad row frq', frq_t, frq_b)
+      //if (window.DEBUG)
+      //  console.log('bad row frq', frq_t, frq_b)
       return -1;
     }
     //タイミングパターンからインデクスを作成
@@ -9444,8 +9444,8 @@ PerspectivePixelReader = ASKlass('PerspectivePixelReader',
     var frq_r=this.getColFrequency(i_reader,i_raster_size,i_th.rb_x/*-0.5*lxdiff*/,i_th.th_h,i_th.th_l,freq_index2);
     //周波数はまとも？
     if((frq_l<0 && frq_r<0) || frq_l==frq_r){
-      if (window.DEBUG)
-        console.log('bad col frq', frq_l, frq_r);
+      //if (window.DEBUG)
+      //  console.log('bad col frq', frq_l, frq_r);
       return -1;
     }
     //タイミングパターンからインデクスを作成
@@ -9458,8 +9458,8 @@ PerspectivePixelReader = ASKlass('PerspectivePixelReader',
     }
     //同じ周期？
     if(freq_v!=freq_h){
-      if (window.DEBUG)
-        console.log('freq mismatch', freq_v, freq_h)
+      //if (window.DEBUG)
+      //  console.log('freq mismatch', freq_v, freq_h)
       return -1;
     }
     for(i=0;i<freq_v+freq_v-1;i++){
@@ -9470,8 +9470,8 @@ PerspectivePixelReader = ASKlass('PerspectivePixelReader',
     }
     //Lv4以上は無理
     if(freq_v>this.MAX_FREQ){
-      if (window.DEBUG)
-        console.log('too high freq', freq_v)
+      //if (window.DEBUG)
+      //  console.log('too high freq', freq_v)
       return -1;
     }
     return freq_v;
@@ -9517,13 +9517,13 @@ PerspectivePixelReader = ASKlass('PerspectivePixelReader',
     }
     var resolution=size+size-1;
     if(size<0){
-      if (window.DEBUG)
-        console.log('readDataBits: size < 0');
+      //if (window.DEBUG)
+      //  console.log('readDataBits: size < 0');
       return false;
     }
     if(!o_bitbuffer.initEncoder(size-1)){
-      if (window.DEBUG)
-        console.log('readDataBits: initEncoder');
+      //if (window.DEBUG)
+      //  console.log('readDataBits: initEncoder');
       return false;
     }
     var cpara=this._cparam;
