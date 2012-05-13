@@ -144,10 +144,13 @@
 
         var light = new THREE.PointLight(0xffffff);
         light.position.set(400, 500, 100);
-        scene.add(light);
+        //scene.add(light);
 
         var light = new THREE.PointLight(0xffffff);
         light.position.set(-400, -500, -100);
+        //scene.add(light);
+
+        var light = new THREE.AmbientLight(0xffffff);
         scene.add(light);
 
         // Create a camera and a marker root object for your Three.js scene.
@@ -156,7 +159,7 @@
 
         loader = new THREE.JSONLoader();
         //loader.load( 'models/monster.js', function(geometry) {
-        loader.load( 'models/trex.js', function(geometry) {
+        loader.load( 'models/steg.js', function(geometry) {
 
             var faceMaterial = new THREE.MeshFaceMaterial();
 
@@ -187,7 +190,7 @@
         tmp = new Float32Array(16);
 
         // Next we need to make the Three.js camera use the FLARParam matrix.
-        flarParam.copyCameraMatrix(tmp, 10, 10000);
+        flarParam.copyCameraMatrix(tmp, 5, 5000);
         camera.projectionMatrix.setFromArray(tmp);
 
         videoTex = new THREE.Texture(videoCanvas);
