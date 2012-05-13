@@ -1,5 +1,5 @@
 body {
-  font: 16px "Arial", Verdana, "Trebuchet MS", Georgia, sans-serif;
+  font: 24px "Arial", Verdana, "Trebuchet MS", Georgia, sans-serif;
   padding: 0;
   margin: 0;
   width: 100%;
@@ -124,7 +124,7 @@ body.three-d div.slides {
 }
             
 h1 {
-  font-size: 4em;
+  font-size: 3em;
   font-weight: bold;
   padding: 0;
   margin: 0;
@@ -132,11 +132,11 @@ h1 {
 }
       
 h2 {
-  font-size: 2.5em;
+  font-size: 3em;
   font-weight: bold;
   padding: 0;
   margin: 0;
-  text-shadow: none;
+  text-shadow: 1px 1px 1px #1b5d94;
 }
             
 h2:first-child {
@@ -317,11 +317,6 @@ pre input[type="range"] {
   content: '· ';
 }
 
-.stroke {
-  -webkit-text-stroke-color: red;
-  -webkit-text-stroke-width: 1px;
-} /* currently webkit-only */
-
 .formula {
   font-size: 50px;
 }
@@ -439,8 +434,16 @@ ul.small {
   font-size: 0.9em;
 }
 
+ol {
+  width: 50%;
+  margin: 1em auto;
+  padding-left: 20px;
+  font-size: 2.5em;
+  text-align: left;
+}
+
 li {
-  padding: 10px 0;
+  padding: 15px 0;
 }
 
 .caption {
@@ -453,7 +456,18 @@ li {
   border-bottom: 1px solid #666;
 }
 
-/* The slides... */
+h2.top {
+  height: 100px;
+  line-height: 100px;
+  margin-top: 40px;
+}
+
+h2.central {
+  margin-top: 30%;
+}
+
+/* Slide-specific styles */
+
 .slide.intro {
     background: url(../img/intro-slide-background.jpg) no-repeat top left;
 }
@@ -465,24 +479,26 @@ li {
   -webkit-transform: rotate(-0.5deg);
   -moz-transform: rotate(-0.5deg);
   text-align: center;
-  -webkit-text-stroke: 1px black;
+  -webkit-text-stroke: 1px #000; /* #83c1f5; */
+  text-shadow: 1px 1px 0px #000;
 }
 
 .intro h1 {
   top: 270px;
-  left: 240px;
+  left: 250px;
   width: 700px;
 }
 
 .intro h2 {
+  font-size: 1.8em;
   top: 400px;
-  left: 240px;
+  left: 250px;
   width: 700px;
 }
 
-.webrtcdemo h2 {
-  height: 100px;
-  line-height: 100px;
+.what-ar-is h2 {
+  font-size: 2.5em;
+  margin-top: 20px;
 }
 
 .webrtcdemo canvas {
