@@ -1,5 +1,6 @@
 /* Based on HTML5 Rocks Demo by Ilmari Heikkinen */
 /* See: http://www.html5rocks.com/en/tutorials/webgl/jsartoolkit_webrtc/ */
+/* Refactored and adapted by Peter O'Shaughnessy */
 (function() {
 
     var DETECTOR_THRESHOLD = 128;
@@ -100,8 +101,6 @@
         canvasContext = canvas.getContext('2d');
         canvasContext.font = "24px URW Gothic L, Arial, Sans-serif";
 
-        //console.log('set up video canvas');
-
         videoCanvas = document.createElement('canvas');
         videoCanvas.id = 'videoCanvas'; // Just for debugging
         videoCanvas.width = CANVAS_WIDTH;
@@ -142,15 +141,7 @@
 
         scene = new THREE.Scene();
 
-        var light = new THREE.PointLight(0xffffff);
-        light.position.set(400, 500, 100);
-        //scene.add(light);
-
-        var light = new THREE.PointLight(0xffffff);
-        light.position.set(-400, -500, -100);
-        //scene.add(light);
-
-        var light = new THREE.AmbientLight(0xffffff);
+        var light = new THREE.AmbientLight(0xcccccc);
         scene.add(light);
 
         // Create a camera and a marker root object for your Three.js scene.
@@ -158,7 +149,6 @@
         scene.add(camera);
 
         loader = new THREE.JSONLoader();
-        //loader.load( 'models/monster.js', function(geometry) {
         loader.load( 'models/steg.js', function(geometry) {
 
             var faceMaterial = new THREE.MeshFaceMaterial();
@@ -167,13 +157,8 @@
 
             model.scale.set(6, 6, 6);
 
-            //model.rotation.z = Math.PI;
             model.rotation.x = -Math.PI / 2;
             model.rotation.y = Math.PI / 2;
-
-            //model.position.set(0, 0, -50);
-
-            //scene.add( model );
 
         });
 
@@ -210,13 +195,11 @@
         videoScene.add(plane);
         videoScene.add(videoCam);
 
-        setInterval(updateScene, 33); // XXX Every 15ms?
+        setInterval(updateScene, 33); // Updated every 33ms?
 
     };
 
     var updateScene = function() {
-
-        //console.log('Update');
 
         if( video.ended ) {
             video.play();
@@ -232,10 +215,6 @@
 
         lastTime = video.currentTime;
 
-        //console.log('Last time: ', lastTime);
-
-        //console.log('does video canvas exist now? ' + videoCanvas, $('#videoCanvas').length);
-
         videoCanvas.getContext('2d').drawImage(video,0,0);
 
         canvasContext.drawImage(videoCanvas, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
@@ -245,10 +224,8 @@
 
         var detected = detector.detectMarkerLite(raster, DETECTOR_THRESHOLD);
 
-        //console.log('Detected', detected);
-
         // Go through detected markers
-        // NB. It seems markers do not need to be defined? It will recognise any image with thick black border?
+        // NB. It seems marker images do not need to be defined? It will recognise any image with thick black border?
         for( var idx = 0; idx < detected; idx++ ) {
 
             var id = detector.getIdMarkerData(idx);
@@ -274,8 +251,6 @@
             markers[currId].transform = Object.asCopy(resultMat);
         }
 
-        //console.log('Markers', markers);
-
         for( var i in markers ) {
 
             var r = markers[i];
@@ -288,38 +263,18 @@
             r.age++;
         }
 
-        //console.log('After removing, markers: ', markers);
-
         for( var i in markers ) {
 
             var m = markers[i];
 
-            //console.log('m.model', m.model);
-
-            // If 3D model not created yet?
-            //if( !m.model ) {
             if( !m.model && model != undefined ) {
-
-                //console.log('Set marker model');
 
                 m.model = new THREE.Object3D();
 
-                var cube = new THREE.Mesh(
-                    new THREE.CubeGeometry(100,100,100),
-                    new THREE.MeshLambertMaterial({color: 0|(0xffffff*Math.random())})
-                );
-
-                //cube.position.z = -50;
-                //cube.doubleSided = true;
-
-                //model.position.z = -50;
-
                 m.model.matrixAutoUpdate = false;
 
-                //m.model.add(cube);
+                // Add our dinosaur model
                 m.model.add(model);
-
-                //console.log('Adding to scene:', m.model);
 
                 scene.add(m.model);
             }
@@ -329,8 +284,6 @@
             m.model.matrix.setFromArray(tmp);
             m.model.matrixWorldNeedsUpdate = true;
         }
-
-        //console.log('Render scene');
 
         renderer.clear();
         renderer.render(videoScene, videoCam);
