@@ -21,6 +21,16 @@
     var resultMat;
     var detector;
 
+    var markers = {};
+    var lastTime = 0;
+
+    var videoTex;
+    var videoScene;
+    var videoCam;
+
+    var camera;
+
+
     window.DEBUG = true; // Means JSARToolkit will output to debugCanvas
 
     // For creating an object URL from the stream - for assigning the webcam stream to the video element
@@ -52,8 +62,8 @@
         video.autoplay = true;
         video.controls = true;
 
-        // XXX Hide video element - we should see the canvas over the top of it
-        //video.style.display = 'none';
+        // Hide video element - we should see it rendered on canvas
+        video.style.display = 'none';
 
         $('#loading').hide();
         document.body.appendChild(video);
@@ -137,7 +147,7 @@
         scene.add(light);
 
         // Create a camera and a marker root object for your Three.js scene.
-        var camera = new THREE.Camera();
+        camera = new THREE.Camera();
         scene.add(camera);
 
         renderer = new THREE.WebGLRenderer();
@@ -154,7 +164,7 @@
         flarParam.copyCameraMatrix(tmp, 10, 10000);
         camera.projectionMatrix.setFromArray(tmp);
 
-        var videoTex = new THREE.Texture(videoCanvas);
+        videoTex = new THREE.Texture(videoCanvas);
 
         // Create scene and quad for the video.
         var plane = new THREE.Mesh(
@@ -165,127 +175,126 @@
         plane.material.depthTest = false;
         plane.material.depthWrite = false;
 
-        var videoCam = new THREE.Camera();
-        var videoScene = new THREE.Scene();
+        videoCam = new THREE.Camera();
+        videoScene = new THREE.Scene();
 
         videoScene.add(plane);
         videoScene.add(videoCam);
 
-        var markers = {};
-        var lastTime = 0;
+        setInterval(updateScene, 1000); // XXX Every 15ms?
 
-        setInterval(function(){
+    };
 
-            //console.log('Update');
+    var updateScene = function() {
 
-            if( video.ended ) {
-                video.play();
-            }
+        //console.log('Update');
 
-            if( video.paused || window.paused || video.currentTime == lastTime ) {
-                return;
-            }
+        if( video.ended ) {
+            video.play();
+        }
 
-            if( video.currentTime == video.duration ) {
-                video.currentTime = 0;
-            }
+        if( video.paused || window.paused || video.currentTime == lastTime ) {
+            return;
+        }
 
-            lastTime = video.currentTime;
+        if( video.currentTime == video.duration ) {
+            video.currentTime = 0;
+        }
 
-            //console.log('Last time: ', lastTime);
+        lastTime = video.currentTime;
 
-            //console.log('does video canvas exist now? ' + videoCanvas, $('#videoCanvas').length);
+        //console.log('Last time: ', lastTime);
 
-            videoCanvas.getContext('2d').drawImage(video,0,0);
+        //console.log('does video canvas exist now? ' + videoCanvas, $('#videoCanvas').length);
 
-            canvasContext.drawImage(videoCanvas, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+        videoCanvas.getContext('2d').drawImage(video,0,0);
 
-            canvas.changed = true;
-            videoTex.needsUpdate = true;
+        canvasContext.drawImage(videoCanvas, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
-            var detected = detector.detectMarkerLite(raster, DETECTOR_THRESHOLD);
+        canvas.changed = true;
+        videoTex.needsUpdate = true;
 
-            console.log('Detected', detected);
+        var detected = detector.detectMarkerLite(raster, DETECTOR_THRESHOLD);
 
-            // Go through detected markers
-            // NB. It seems markers do not need to be defined? It will recognise any image with thick black border?
-            for( var idx = 0; idx < detected; idx++ ) {
+        console.log('Detected', detected);
 
-                var id = detector.getIdMarkerData(idx);
+        // Go through detected markers
+        // NB. It seems markers do not need to be defined? It will recognise any image with thick black border?
+        for( var idx = 0; idx < detected; idx++ ) {
 
-                var currId;
+            var id = detector.getIdMarkerData(idx);
 
-                if( id.packetLength > 4 ) {
-                    currId = -1;
-                } else {
-                    currId = 0;
-                    for( var i = 0; i < id.packetLength; i++ ) {
-                        currId = (currId << 8) | id.getPacketData(i);
-                    }
+            var currId;
+
+            if( id.packetLength > 4 ) {
+                currId = -1;
+            } else {
+                currId = 0;
+                for( var i = 0; i < id.packetLength; i++ ) {
+                    currId = (currId << 8) | id.getPacketData(i);
                 }
-
-                if( !markers[currId] ) {
-                    markers[currId] = {};
-                }
-
-                detector.getTransformMatrix(idx, resultMat);
-
-                markers[currId].age = 0;
-                markers[currId].transform = Object.asCopy(resultMat);
             }
 
-            console.log('Markers', markers);
-
-            for( var i in markers ) {
-
-                var r = markers[i];
-
-                if (r.age > 1) {
-                    delete markers[i];
-                    scene.remove(r.model);
-                }
-
-                r.age++;
+            if( !markers[currId] ) {
+                markers[currId] = {};
             }
 
-            for( var i in markers ) {
+            detector.getTransformMatrix(idx, resultMat);
 
-                var m = markers[i];
+            markers[currId].age = 0;
+            markers[currId].transform = Object.asCopy(resultMat);
+        }
 
-                // If 3D model not created yet?
-                if( !m.model ) {
+        console.log('Markers', markers);
 
-                    m.model = new THREE.Object3D();
+        for( var i in markers ) {
 
-                    var cube = new THREE.Mesh(
-                        new THREE.CubeGeometry(100,100,100),
-                        new THREE.MeshLambertMaterial({color: 0|(0xffffff*Math.random())})
-                    );
+            var r = markers[i];
 
-                    cube.position.z = -50;
-                    cube.doubleSided = true;
-
-                    m.model.matrixAutoUpdate = false;
-
-                    m.model.add(cube);
-
-                    scene.add(m.model);
-                }
-
-                copyMatrix(m.transform, tmp);
-
-                m.model.matrix.setFromArray(tmp);
-                m.model.matrixWorldNeedsUpdate = true;
+            if (r.age > 1) {
+                delete markers[i];
+                scene.remove(r.model);
             }
 
-            //console.log('Render scene');
+            r.age++;
+        }
 
-            renderer.autoClear = false;
-            renderer.clear();
-            renderer.render(videoScene, videoCam);
-            renderer.render(scene, camera);
+        for( var i in markers ) {
 
-        }, 1000); // XXX Every 15ms?
+            var m = markers[i];
+
+            // If 3D model not created yet?
+            if( !m.model ) {
+
+                m.model = new THREE.Object3D();
+
+                var cube = new THREE.Mesh(
+                    new THREE.CubeGeometry(100,100,100),
+                    new THREE.MeshLambertMaterial({color: 0|(0xffffff*Math.random())})
+                );
+
+                cube.position.z = -50;
+                cube.doubleSided = true;
+
+                m.model.matrixAutoUpdate = false;
+
+                m.model.add(cube);
+
+                scene.add(m.model);
+            }
+
+            copyMatrix(m.transform, tmp);
+
+            m.model.matrix.setFromArray(tmp);
+            m.model.matrixWorldNeedsUpdate = true;
+        }
+
+        //console.log('Render scene');
+
+        renderer.autoClear = false;
+        renderer.clear();
+        renderer.render(videoScene, videoCam);
+        renderer.render(scene, camera);
 
     };
 
