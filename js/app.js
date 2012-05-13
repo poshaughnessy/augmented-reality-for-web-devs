@@ -16,6 +16,8 @@
 
     var scene;
     var renderer;
+    var loader;
+    var model;
 
     var raster;
     var resultMat;
@@ -29,6 +31,7 @@
     var videoCam;
 
     var camera;
+    var tmp;
 
 
     window.DEBUG = true; // Means JSARToolkit will output to debugCanvas
@@ -150,15 +153,32 @@
         camera = new THREE.Camera();
         scene.add(camera);
 
+        loader = new THREE.JSONLoader();
+        loader.load( 'models/monster.js', function(geometry) {
+
+            var faceMaterial = new THREE.MeshFaceMaterial();
+
+            model = new THREE.Mesh(geometry, faceMaterial);
+
+            model.scale.set(10, 10, 10);
+
+            model.position.set(0, 0, 0);
+
+            scene.add( model );
+
+        });
+
         renderer = new THREE.WebGLRenderer();
         renderer.setSize(CANVAS_WIDTH, CANVAS_HEIGHT);
+        renderer.autoClear = false;
 
         glCanvas = renderer.domElement;
         glCanvas.style.webkitTransform = 'scale(-1.0, 1.0)';
         glCanvas.width = CANVAS_WIDTH;
         glCanvas.height = CANVAS_HEIGHT;
+        document.body.appendChild(glCanvas);
 
-        var tmp = new Float32Array(16);
+        tmp = new Float32Array(16);
 
         // Next we need to make the Three.js camera use the FLARParam matrix.
         flarParam.copyCameraMatrix(tmp, 10, 10000);
@@ -187,7 +207,7 @@
 
     var updateScene = function() {
 
-        //console.log('Update');
+        console.log('Update');
 
         if( video.ended ) {
             video.play();
@@ -245,7 +265,7 @@
             markers[currId].transform = Object.asCopy(resultMat);
         }
 
-        console.log('Markers', markers);
+        //console.log('Markers', markers);
 
         for( var i in markers ) {
 
@@ -259,12 +279,18 @@
             r.age++;
         }
 
+        //console.log('After removing, markers: ', markers);
+
         for( var i in markers ) {
 
             var m = markers[i];
 
+            //console.log('m.model', m.model);
+
             // If 3D model not created yet?
             if( !m.model ) {
+
+                console.log('Create cube');
 
                 m.model = new THREE.Object3D();
 
@@ -291,7 +317,6 @@
 
         //console.log('Render scene');
 
-        renderer.autoClear = false;
         renderer.clear();
         renderer.render(videoScene, videoCam);
         renderer.render(scene, camera);
