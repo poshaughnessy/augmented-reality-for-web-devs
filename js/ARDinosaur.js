@@ -5,8 +5,8 @@
 
     var DETECTOR_THRESHOLD = 128;
 
-    var CANVAS_WIDTH = 1024;
-    var CANVAS_HEIGHT = 768;
+    var CANVAS_WIDTH = 512; //640;
+    var CANVAS_HEIGHT = 386; //480;
 
     var video;
     var canvas;
@@ -35,7 +35,7 @@
     var tmp;
 
 
-    window.DEBUG = false; // True means JSARToolkit will output to debugCanvas
+    window.DEBUG = true; // True means JSARToolkit will output to debugCanvas
 
     // For creating an object URL from the stream - for assigning the webcam stream to the video element
     var URL = window.URL || window.webkitURL;
@@ -110,7 +110,7 @@
         debugCanvas.id = 'debugCanvas';
         debugCanvas.width = CANVAS_WIDTH;
         debugCanvas.height = CANVAS_HEIGHT;
-        //$('#webRTCDemo').append(debugCanvas);
+        $('#webRTCDemo').append(debugCanvas);
     };
 
     var setUpJSARToolkit = function() {
@@ -278,6 +278,11 @@
                 m.model.add(model);
 
                 scene.add(m.model);
+
+                // Sound effect
+                var sound = new Audio('../media/dinosaur.mp3');
+                sound.play();
+
             }
 
             copyMatrix(m.transform, tmp);

@@ -480,18 +480,22 @@ li {
   width: 700px;
 }
 
-.webrtcdemo {
-
+.webrtcdemo h2 {
+  height: 100px;
+  line-height: 100px;
 }
 
 .webrtcdemo canvas {
   /* XXX Hack to overcome problem with canvas size - trying to get it to end up being 1024x768 */
   /* Fudged for Chrome Canary - bound to break in any other browser */
+  /*
   width: 1638px;
   height: 1229px;
   margin-left: -614px;
+  */
 }
 
-#debugCanvas {
-  display: none;
+.webrtcdemo #debugCanvas {
+  float: left;
 }
+
