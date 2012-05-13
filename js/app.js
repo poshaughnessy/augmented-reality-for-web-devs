@@ -1,32 +1,32 @@
+/* Based on HTML5 Rocks Demo by Ilmari Heikkinen */
+/* See: http://www.html5rocks.com/en/tutorials/webgl/jsartoolkit_webrtc/ */
 (function() {
 
-    threshold = 128;
-    DEBUG = false;
+    var DETECTOR_THRESHOLD = 128;
 
-    photos = Photos.map(Image.load);
+    var CANVAS_WIDTH = 640;
+    var CANVAS_HEIGHT = 480;
 
-    var video = document.createElement('video');
-    video.width = 640;
-    video.height = 480;
-    video.loop = true;
-    video.volume = 0;
-    video.autoplay = true;
-    video.style.display = 'none';
-    video.controls = true;
+    var video;
+    var canvas;
+    var videoCanvas;
+    var glCanvas;
+    var canvasContext;
+    var flarParam;
 
-    /*
-    function hasGetUserMedia() {
-        // Note: Opera builds are unprefixed.
-        return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
-            navigator.mozGetUserMedia || navigator.msGetUserMedia);
-    }
+    var scene;
+    var renderer;
 
-    if (hasGetUserMedia()) {
-        alert('Good to go!');
-    } else {
-        alert('getUserMedia() is not supported in your browser');
-    }
-    */
+    var raster;
+    var resultMat;
+    var detector;
+
+    window.DEBUG = true; // Means JSARToolkit will output to debugCanvas
+
+    // For creating an object URL from the stream - for assigning the webcam stream to the video element
+    var URL = window.URL || window.webkitURL;
+    var createObjectURL = URL.createObjectURL || webkitURL.createObjectURL;
+
 
     var getUserMedia = function(t, onsuccess, onerror) {
         if (navigator.getUserMedia) {
@@ -42,225 +42,299 @@
         }
     };
 
-    var URL = window.URL || window.webkitURL;
-    var createObjectURL = URL.createObjectURL || webkitURL.createObjectURL;
-    if (!createObjectURL) {
-        throw new Error("URL.createObjectURL not found.");
-    }
+    var setUpVideoElement = function() {
 
-    getUserMedia({'video': true},
-        function(stream) {
-            var url = createObjectURL(stream);
-            video.src = url;
-        },
-        function(error) {
-            alert("Couldn't access webcam.");
-        }
-    );
+        video = document.createElement('video');
+        video.width = CANVAS_WIDTH;
+        video.height = CANVAS_HEIGHT;
+        video.loop = true;
+        video.volume = 0;
+        video.autoplay = true;
+        video.controls = true;
 
-    function sizeCanvas() {
-        // video.onloadedmetadata not firing in Chrome. See crbug.com/110938.
-        setTimeout(function() {
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-            img.height = video.videoHeight;
-            img.width = video.videoWidth;
-        }, 50);
-    }
+        // XXX Hide video element - we should see the canvas over the top of it
+        //video.style.display = 'none';
 
-    window.onload = function() {
-        byId('loading').style.display = 'none';
+        $('#loading').hide();
         document.body.appendChild(video);
 
-        var canvas = document.createElement('canvas');
-        canvas.width = 640;
-        canvas.height = 480;
-        canvas.style.display = 'block';
+    };
 
-        // XXX Peter's test
-        //sizeCanvas();
+    var feedWebCamToVideoElement = function() {
 
-        var videoCanvas = document.createElement('canvas');
-        videoCanvas.width = video.width;
-        videoCanvas.height = video.height;
+        // Get user media and assign to video element
+        getUserMedia({'video': true},
+            function(stream) {
+                var url = createObjectURL(stream);
+                video.src = url;
+            },
+            function(error) {
+                alert("Couldn't access webcam.");
+            }
+        );
+
+    };
+
+    var setUpCanvases = function() {
+
+        canvas = document.createElement('canvas');
+        canvas.width = CANVAS_WIDTH;
+        canvas.height = CANVAS_HEIGHT;
+        //canvas.style.display = 'block';
+        document.body.appendChild(canvas);
+
+        canvasContext = canvas.getContext('2d');
+        canvasContext.font = "24px URW Gothic L, Arial, Sans-serif";
+
+        console.log('set up video canvas');
+
+        videoCanvas = document.createElement('canvas');
+        videoCanvas.id = 'videoCanvas';
+        videoCanvas.width = CANVAS_WIDTH;
+        videoCanvas.height = CANVAS_HEIGHT;
+
+        // JSARToolkit will pick this out from its ID
+        var debugCanvas = document.createElement('canvas');
+        debugCanvas.id = 'debugCanvas';
+        debugCanvas.width = CANVAS_WIDTH;
+        debugCanvas.height = CANVAS_HEIGHT;
+        document.body.appendChild(debugCanvas);
+    };
+
+    var setUpJSARToolkit = function() {
 
         // Create a RGB raster object for the 2D canvas.
         // JSARToolKit uses raster objects to read image data.
         // Note that you need to set canvas.changed = true on every frame.
-        var raster = new NyARRgbRaster_Canvas2D(canvas);
+        raster = new NyARRgbRaster_Canvas2D(canvas);
 
         // FLARParam is the thing used by FLARToolKit to set camera parameters.
-        // Here we create a FLARParam for images with 320x240 pixel dimensions.
-        var param = new FLARParam(640,480);
+        // Here we create a FLARParam for images with 640x480 pixel dimensions.
+        flarParam = new FLARParam(CANVAS_WIDTH,CANVAS_HEIGHT);
 
-        var resultMat = new NyARTransMatResult();
+        resultMat = new NyARTransMatResult();
 
         // The FLARMultiIdMarkerDetector is the actual detection engine for marker detection.
         // It detects multiple ID markers. ID markers are special markers that encode a number.
-        var detector = new FLARMultiIdMarkerDetector(param, 120);
+        detector = new FLARMultiIdMarkerDetector(flarParam, 120);
 
         // For tracking video set continue mode to true. In continue mode, the detector
         // tracks markers across multiple frames.
         detector.setContinueMode(true);
 
-        var ctx = canvas.getContext('2d');
-        ctx.font = "24px URW Gothic L, Arial, Sans-serif";
+    };
 
-        var glCanvas = document.createElement('canvas');
+    var setUpScene = function() {
+
+        scene = new THREE.Scene();
+
+        var light = new THREE.PointLight(0xffffff);
+        light.position.set(400, 500, 100);
+        scene.add(light);
+
+        var light = new THREE.PointLight(0xffffff);
+        light.position.set(-400, -500, -100);
+        scene.add(light);
+
+        // Create a camera and a marker root object for your Three.js scene.
+        var camera = new THREE.Camera();
+        scene.add(camera);
+
+        renderer = new THREE.WebGLRenderer();
+        renderer.setSize(CANVAS_WIDTH, CANVAS_HEIGHT);
+
+        glCanvas = renderer.domElement;
         glCanvas.style.webkitTransform = 'scale(-1.0, 1.0)';
-        //glCanvas.width = 960;
-        //glCanvas.height = 720;
-        glCanvas.width = 640;
-        glCanvas.height = 480;
-        var s = glCanvas.style;
-        document.body.appendChild(glCanvas);
-        display = new Magi.Scene(glCanvas);
-        display.drawOnlyWhenChanged = true;
+        glCanvas.width = CANVAS_WIDTH;
+        glCanvas.height = CANVAS_HEIGHT;
 
-        // Copy the camera perspective matrix from the FLARParam to the WebGL library camera matrix.
-        // The second and third parameters determine the zNear and zFar planes for the perspective matrix.
-        param.copyCameraMatrix(display.camera.perspectiveMatrix, 10, 10000);
+        var tmp = new Float32Array(16);
 
-        display.camera.useProjectionMatrix = true;
-        var videoTex = new Magi.FlipFilterQuad();
-        videoTex.material.textures.Texture0 = new Magi.Texture();
-        videoTex.material.textures.Texture0.image = videoCanvas;
-        videoTex.material.textures.Texture0.generateMipmaps = false;
-        display.scene.appendChild(videoTex);
+        // Next we need to make the Three.js camera use the FLARParam matrix.
+        flarParam.copyCameraMatrix(tmp, 10, 10000);
+        camera.projectionMatrix.setFromArray(tmp);
 
-        var times = [];
-        var pastResults = {};
+        var videoTex = new THREE.Texture(videoCanvas);
+
+        // Create scene and quad for the video.
+        var plane = new THREE.Mesh(
+            new THREE.PlaneGeometry(2, 2, 0),
+            new THREE.MeshBasicMaterial({map: videoTex})
+        );
+
+        plane.material.depthTest = false;
+        plane.material.depthWrite = false;
+
+        var videoCam = new THREE.Camera();
+        var videoScene = new THREE.Scene();
+
+        videoScene.add(plane);
+        videoScene.add(videoCam);
+
+        var markers = {};
         var lastTime = 0;
-        var cubes = {};
-        var images = [];
 
-        window.updateImage = function() {
-            display.changed = true;
-        }
-        window.addEventListener('keydown', function(ev) {
-            if (Key.match(ev, Key.LEFT)) {
-                images.forEach(function(e){ e.setImage(photos.rotate(true)); });
-            } else if (Key.match(ev, Key.RIGHT)) {
-                images.forEach(function(e){ e.setImage(photos.rotate(false)); });
+        setInterval(function(){
+
+            //console.log('Update');
+
+            if( video.ended ) {
+                video.play();
             }
-        }, false);
 
-        setInterval(function() {
+            if( video.paused || window.paused || video.currentTime == lastTime ) {
+                return;
+            }
 
-            if (video.ended) video.play();
-            if (video.paused) return;
-            if (window.paused) return;
-            if (video.currentTime == video.duration) {
+            if( video.currentTime == video.duration ) {
                 video.currentTime = 0;
             }
-            if (video.currentTime == lastTime) return;
-            lastTime = video.currentTime;
-            videoCanvas.getContext('2d').drawImage(video,0,0);
-            ctx.drawImage(videoCanvas, 0,0,640,480);
-            var dt = new Date().getTime();
 
-            videoTex.material.textures.Texture0.changed = true;
+            lastTime = video.currentTime;
+
+            //console.log('Last time: ', lastTime);
+
+            //console.log('does video canvas exist now? ' + videoCanvas, $('#videoCanvas').length);
+
+            videoCanvas.getContext('2d').drawImage(video,0,0);
+
+            canvasContext.drawImage(videoCanvas, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
             canvas.changed = true;
-            display.changed = true;
+            videoTex.needsUpdate = true;
 
-            var t = new Date();
-            var detected = detector.detectMarkerLite(raster, threshold);
-            for (var idx = 0; idx<detected; idx++) {
+            var detected = detector.detectMarkerLite(raster, DETECTOR_THRESHOLD);
+
+            console.log('Detected', detected);
+
+            // Go through detected markers
+            // NB. It seems markers do not need to be defined? It will recognise any image with thick black border?
+            for( var idx = 0; idx < detected; idx++ ) {
+
                 var id = detector.getIdMarkerData(idx);
 
                 var currId;
-                if (id.packetLength > 4) {
+
+                if( id.packetLength > 4 ) {
                     currId = -1;
-                }else{
-                    currId=0;
-                    for (var i = 0; i < id.packetLength; i++ ) {
+                } else {
+                    currId = 0;
+                    for( var i = 0; i < id.packetLength; i++ ) {
                         currId = (currId << 8) | id.getPacketData(i);
-                        //console.log("id[", i, "]=", id.getPacketData(i));
                     }
                 }
-                //console.log("[add] : ID = " + currId);
-                if (!pastResults[currId]) {
-                    pastResults[currId] = {};
+
+                if( !markers[currId] ) {
+                    markers[currId] = {};
                 }
+
                 detector.getTransformMatrix(idx, resultMat);
-                pastResults[currId].age = 0;
-                pastResults[currId].transform = Object.asCopy(resultMat);
+
+                markers[currId].age = 0;
+                markers[currId].transform = Object.asCopy(resultMat);
             }
-            for (var i in pastResults) {
-                var r = pastResults[i];
+
+            console.log('Markers', markers);
+
+            for( var i in markers ) {
+
+                var r = markers[i];
+
                 if (r.age > 1) {
-                    delete pastResults[i];
-                    cubes[i].image.setImage(photos.rotate());
+                    delete markers[i];
+                    scene.remove(r.model);
                 }
+
                 r.age++;
             }
-            for (var i in cubes) cubes[i].display = false;
-            for (var i in pastResults) {
-                if (!cubes[i]) {
-                    var pivot = new Magi.Node();
-                    pivot.transform = mat4.identity();
-                    pivot.setScale(80);
-                    var image = new Magi.Image();
-                    image
-                        .setAlign(image.centerAlign, image.centerAlign)
-                        .setPosition(0, 0, 0)
-                        .setAxis(0,0,1)
-                        .setAngle(Math.PI)
-                        .setSize(1.5);
-                    image.setImage = function(src) {
-                        var img = E.canvas(640,640);
-                        Magi.Image.setImage.call(this, img);
-                        this.texture.generateMipmaps = false;
-                        var self = this;
-                        src.onload = function(){
-                            var w = this.width, h = this.height;
-                            var f = Math.min(640/w, 640/h);
-                            w = (w*f);
-                            h = (h*f);
-                            img.getContext('2d').drawImage(this, (640-w)/2,(640-h)/2,w,h);
-                            self.texture.changed = true;
-                            self.setSize(1.1*Math.max(w/h, h/w));
-                        };
-                        if (Object.isImageLoaded(src)) {
-                            src.onload();
-                        }
-                    };
-                    image.setImage(photos.rotate());
-                    images.push(image);
-                    pivot.image = image;
-                    pivot.appendChild(image);
-                    /*var txt = new Magi.Text(i);
-                     txt.setColor('#f0f0d8');
-                     txt.setFont('URW Gothic L, Arial, Sans-serif');
-                     txt.setFontSize(32);
-                     txt.setAlign(txt.leftAlign, txt.bottomAlign)
-                     .setPosition(-0.45, -0.48, -0.51)
-                     .setScale(1/190);*/
-                    display.scene.appendChild(pivot);
-                    cubes[i] = pivot;
+
+            for( var i in markers ) {
+
+                var m = markers[i];
+
+                // If 3D model not created yet?
+                if( !m.model ) {
+
+                    m.model = new THREE.Object3D();
+
+                    var cube = new THREE.Mesh(
+                        new THREE.CubeGeometry(100,100,100),
+                        new THREE.MeshLambertMaterial({color: 0|(0xffffff*Math.random())})
+                    );
+
+                    cube.position.z = -50;
+                    cube.doubleSided = true;
+
+                    m.model.matrixAutoUpdate = false;
+
+                    m.model.add(cube);
+
+                    scene.add(m.model);
                 }
-                cubes[i].display = true;
-                var mat = pastResults[i].transform;
-                var cm = cubes[i].transform;
-                cm[0] = mat.m00;
-                cm[1] = -mat.m10;
-                cm[2] = mat.m20;
-                cm[3] = 0;
-                cm[4] = mat.m01;
-                cm[5] = -mat.m11;
-                cm[6] = mat.m21;
-                cm[7] = 0;
-                cm[8] = -mat.m02;
-                cm[9] = mat.m12;
-                cm[10] = -mat.m22;
-                cm[11] = 0;
-                cm[12] = mat.m03;
-                cm[13] = -mat.m13;
-                cm[14] = mat.m23;
-                cm[15] = 1;
+
+                copyMatrix(m.transform, tmp);
+
+                m.model.matrix.setFromArray(tmp);
+                m.model.matrixWorldNeedsUpdate = true;
             }
-        }, 15);
-    }
+
+            //console.log('Render scene');
+
+            renderer.autoClear = false;
+            renderer.clear();
+            renderer.render(videoScene, videoCam);
+            renderer.render(scene, camera);
+
+        }, 1000); // XXX Every 15ms?
+
+    };
+
+    var init = function() {
+
+        setUpVideoElement();
+
+        feedWebCamToVideoElement();
+
+        setUpCanvases();
+
+        setUpJSARToolkit();
+
+        setUpScene();
+
+    };
+
+    THREE.Matrix4.prototype.setFromArray = function(m) {
+        return this.set(
+            m[0], m[4], m[8], m[12],
+            m[1], m[5], m[9], m[13],
+            m[2], m[6], m[10], m[14],
+            m[3], m[7], m[11], m[15]
+        );
+    };
+
+    var copyMatrix = function(mat, cm) {
+        cm[0] = mat.m00;
+        cm[1] = -mat.m10;
+        cm[2] = mat.m20;
+        cm[3] = 0;
+        cm[4] = mat.m01;
+        cm[5] = -mat.m11;
+        cm[6] = mat.m21;
+        cm[7] = 0;
+        cm[8] = -mat.m02;
+        cm[9] = mat.m12;
+        cm[10] = -mat.m22;
+        cm[11] = 0;
+        cm[12] = mat.m03;
+        cm[13] = -mat.m13;
+        cm[14] = mat.m23;
+        cm[15] = 1;
+    };
+
+    $(function() {
+
+        init();
+
+    });
 
 })();
