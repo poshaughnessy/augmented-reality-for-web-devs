@@ -5,14 +5,14 @@
 
     var DETECTOR_THRESHOLD = 128;
 
-    var CANVAS_WIDTH = 640;
-    var CANVAS_HEIGHT = 480;
+    var CANVAS_WIDTH = 1024;
+    var CANVAS_HEIGHT = 768;
 
     var video;
     var canvas;
     var videoCanvas;
     var glCanvas;
-    var canvasContext;
+    var canvas2dContext;
     var flarParam;
 
     var scene;
@@ -35,7 +35,7 @@
     var tmp;
 
 
-    window.DEBUG = true; // Means JSARToolkit will output to debugCanvas
+    window.DEBUG = false; // True means JSARToolkit will output to debugCanvas
 
     // For creating an object URL from the stream - for assigning the webcam stream to the video element
     var URL = window.URL || window.webkitURL;
@@ -69,8 +69,7 @@
         // Hide video element - we should see it rendered on canvas
         video.style.display = 'none';
 
-        $('#loading').hide();
-        document.body.appendChild(video);
+        $('#webRTCDemo').append(video);
 
     };
 
@@ -96,10 +95,10 @@
         canvas.width = CANVAS_WIDTH;
         canvas.height = CANVAS_HEIGHT;
         canvas.style.display = 'none';
-        document.body.appendChild(canvas);
+        $('#webRTCDemo').append(canvas);
 
-        canvasContext = canvas.getContext('2d');
-        canvasContext.font = "24px URW Gothic L, Arial, Sans-serif";
+        canvas2dContext = canvas.getContext('2d');
+        canvas2dContext.font = "24px URW Gothic L, Arial, Sans-serif";
 
         videoCanvas = document.createElement('canvas');
         videoCanvas.id = 'videoCanvas'; // Just for debugging
@@ -111,7 +110,7 @@
         debugCanvas.id = 'debugCanvas';
         debugCanvas.width = CANVAS_WIDTH;
         debugCanvas.height = CANVAS_HEIGHT;
-        document.body.appendChild(debugCanvas);
+        //$('#webRTCDemo').append(debugCanvas);
     };
 
     var setUpJSARToolkit = function() {
@@ -130,6 +129,8 @@
         // The FLARMultiIdMarkerDetector is the actual detection engine for marker detection.
         // It detects multiple ID markers. ID markers are special markers that encode a number.
         detector = new FLARMultiIdMarkerDetector(flarParam, 120);
+
+        //console.log(detector);
 
         // For tracking video set continue mode to true. In continue mode, the detector
         // tracks markers across multiple frames.
@@ -170,7 +171,7 @@
         glCanvas.style.webkitTransform = 'scale(-1.0, 1.0)';
         glCanvas.width = CANVAS_WIDTH;
         glCanvas.height = CANVAS_HEIGHT;
-        document.body.appendChild(glCanvas);
+        $('#webRTCDemo').append(glCanvas);
 
         tmp = new Float32Array(16);
 
@@ -217,7 +218,7 @@
 
         videoCanvas.getContext('2d').drawImage(video,0,0);
 
-        canvasContext.drawImage(videoCanvas, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+        canvas2dContext.drawImage(videoCanvas, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
         canvas.changed = true;
         videoTex.needsUpdate = true;

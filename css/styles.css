@@ -1,18 +1,497 @@
-html {
-    background: white;
-    color: black;
-}
 body {
-    margin: 0;
-    padding: 0;
-    margin-top: 20px;
-    text-align: center;
+  font: 16px "Arial", Verdana, "Trebuchet MS", Georgia, sans-serif;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0px; top: 0px;
+  background-color: #000;
+  color: #83c1f5;
+  -webkit-font-smoothing: antialiased;
 }
-#loading {
-    font-size: 80px;
-    font-weight: bold;
-    font-family: Times;
+
+.presentation {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0px;
+  top: 0px;
+  display: block;
+  overflow: hidden;
+  /*
+  background: -webkit-gradient(linear, left bottom, left top, from(#444), to(#222));
+  background: -moz-linear-gradient(bottom, #444, #222);
+  background: linear-gradient(bottom, #444, #222);
+  */
 }
+
+.slides {
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  position: absolute;
+  display: block;
+  -webkit-transition: -webkit-transform 1s ease-in-out;
+  -moz-transition: -moz-transform 1s ease-in-out;
+  -o-transition: -o-transform 1s ease-in-out;
+  transition: transform 1s ease-in-out;
+}
+
+.slide {
+  display: none;
+  position: absolute;
+  overflow: hidden;
+  text-align: center;
+  width: 1024px;
+  height: 768px;
+  left: 0;
+  top: 0;
+  background: #000;
+  -webkit-transition: margin 0.25s ease-in-out;
+  -moz-transition: margin 0.25s ease-in-out;
+  -o-transition: margin 0.25s ease-in-out;
+  transition: margin 0.25s ease-in-out;
+}
+
+.slide p, .slide textarea {
+  font-size: 20px;
+}
+
+.slide .counter {
+  color: #999999;
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  display: block;
+  font-size: 12px;
+}
+
+.slide.title > .counter,
+.slide.segue > .counter,
+.slide.mainTitle > .counter {
+  display: none;
+}
+
+.slide .slidesteps {
+  color: #999;
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  display: block;
+  font-size: 12px;
+}
+
+.force-render {
+  display: block;
+  visibility: hidden;
+}
+      
+.slide.far-past {
+  display: block;
+  margin-left: -2048px;
+}
+
+.slide.past {
+  visibility: visible;
+  display: block;
+  margin-left: -1024px;
+}
+      
+.slide.current {
+  visibility: visible;
+  display: block;
+  margin-left: 0px;
+}
+      
+.slide.future {
+  visibility: visible;
+  display: block;
+  margin-left: 1024px;
+}
+      
+.slide.far-future {
+  display: block;
+  margin-left: 2048px;
+}
+
+body.three-d div.slides {
+  -webkit-transform: scale(0.78);
+  -moz-transform: scale(0.78);
+  -o-transform: scale(0.78);
+  transform: scale(0.78);
+}
+            
+h1 {
+  font-size: 4em;
+  font-weight: bold;
+  padding: 0;
+  margin: 0;
+  text-shadow: none;
+}
+      
+h2 {
+  font-size: 2.5em;
+  font-weight: bold;
+  padding: 0;
+  margin: 0;
+  text-shadow: none;
+}
+            
+h2:first-child {
+  margin-top: 0;
+}
+
+section, footer {
+  font-family: 'Arial';
+  text-shadow: rgba(0, 0, 0, 0.2) 0 2px 5px;
+  display: block;
+}
+      
+footer {
+  font-size: 12px;
+  margin: 20px 0 0 30px;
+}
+
+a {
+  color: inherit;
+  display: inline-block;
+  text-decoration: none;
+  line-height: 110%;
+  border-bottom: 2px solid #3f3f3f;
+}
+
+.gmap a {
+  line-height: 100%;
+  border-bottom: none;
+}
+
+button {
+  font-size: 20px;
+}
+      
+pre button {
+  margin: 2px;
+}
+      
+.summary {
+  font-size: 30px;
+}
+
+.bullets {
+  font-size: 40px;
+}
+
+section {
+  margin: 0;
+}
+
+pre {
+  text-align: left;
+  font-family: Courier;        
+  padding: 10px 20px;
+  background: rgba(255, 0, 0, 0.05);
+  -webkit-border-radius: 8px;
+  -khtml-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 0, 0, 0.2);
+  font-size: 1.2em;
+  margin: 0 10px;
+}
+
+pre select {
+  font-family: Monaco, Courier;
+  border: 1px solid #c61800;
+}
+        
+input {
+  font-size: 16px;
+  margin-right: 10px;
+  font-family: Helvetica;
+  padding: 3px;
+}
+input[type="range"] {
+  width: 100%;
+}
+      
+button {
+  margin: 20px 10px 0 0;
+  font-family: Verdana;
+}
+      
+button.large {
+  font-size: 32px;
+}
+        
+pre b {
+  font-weight: normal;
+  color: #c61800;
+  text-shadow: #c61800 0 0 1px;
+}
+pre em {
+  font-weight: normal;
+  font-style: normal;
+  color: #18a600;
+  text-shadow: #18a600 0 0 1px;
+}
+pre input[type="range"] {
+  height: 6px;
+  cursor: pointer;
+  width: auto;
+}
+
+.exampleintro {
+  margin-top: 2em;
+}
+      
+.example {
+  display: block;
+  white-space: pre;
+  font-family: courier;
+  text-align: left;
+  color: #555;
+  margin-top: 2em;
+  line-height: 1.5em;
+}
+     
+.css,
+.js,
+.html,
+.key {
+  font-family: 'Georgia';
+  color: black;
+  display: inline-block;
+  padding: 6px 10px 3px 10px;
+  font-size: 25px;
+  line-height: 30px;
+  text-shadow: none;
+  letter-spacing: 0;
+  bottom: 10px;
+  position: relative;
+  -moz-border-radius: 10px;
+  -khtml-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: white;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 2px 5px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0 2px 5px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.1) 0 2px 5px;
+  -o-box-shadow: rgba(0, 0, 0, 0.1) 0 2px 5px;
+}
+      
+.key { font-family: Arial; }
+      
+:not(header) > .css,
+:not(header) > .js,
+:not(header) > .html,
+:not(header) > .key {
+  margin: 0 5px;
+  bottom: 4px;
+}
+      
+.css {
+  background: -webkit-gradient(linear, left top, left bottom, from(#ff4), to(#ffa));
+  background-color: #ff4;
+  background: -moz-linear-gradient(left top, #ff4, #ffa);
+}
+.js {
+  background: -webkit-gradient(linear, left top, left bottom, from(#4f4), to(#afa));
+  background-color: #4f4;
+  background: -moz-linear-gradient(left top, #4f4, #afa);
+}
+.html {
+  background: -webkit-gradient(linear, left top, left bottom, from(#e88), to(#fee));
+  background-color: #e88;
+  background: -moz-linear-gradient(left top, #e88, #fee);
+}
+
+.two-column {
+  -webkit-column-count: 2;
+  -moz-column-count: 2;
+  column-count: 2;
+}
+      
+.summary li::before, .bullets li::before {
+  content: '· ';
+}
+
+.stroke {
+  -webkit-text-stroke-color: red;
+  -webkit-text-stroke-width: 1px;
+} /* currently webkit-only */
+
+.formula {
+  font-size: 50px;
+}
+      
+#presentation-counter {
+  color: #ccc;
+  font-size: 100px;
+  letter-spacing: 1px;
+  position: absolute;
+  top: 40%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+      
+.hsl-value {
+  display: inline-block;
+  width: 50px;
+}
+
+.notes {
+  display: none;
+  whitespace: pre;
+}
+
+header {
+  font-family: arial;
+  text-shadow: rgba(0, 0, 0, 0.2) 0 2px 5px;
+  color: #fff;
+  margin-top: 20px;
+  text-align: center;
+  font-size: 55px;
+  font-weight: bold;
+}
+
+.hidden {
+  display: none;
+}
+
+.contentSwitcher .switchable, 
+.contentAdder .addable {
+  display: none;
+}
+
+.contentSwitcher .switchable.current, 
+.contentAdder .addable.shown {
+  display: block;
+}
+
+.contentSwitcher.standard {
+  height: 400px;
+  padding: 10px 0px;
+  margin-top: 100px;
+  background: #fff;
+  opacity: 0.95;
+  border-radius: 8px;
+  -moz-border-radius: 8px;
+  -khtml-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  text-align: center;
+  font-size: 1.6em;
+  text-shadow: rgba(0, 0, 0, 0.1) 0 2px 2px;
+}
+
+.contentSwitcher.withheading h3 {
+  color: #fff;
+  font-size: 1.3em;
+  padding-bottom: 8px;
+  margin: 0.5em 0 1em;
+  font-weight: normal;
+}
+
+.framelandscape a {
+  border: 0;
+}
+
+.frame a {
+  border: 0;
+}
+
+ul {
+  line-height: 1.5em;
+  list-style-type: none;
+  margin: 0 auto;
+  text-align: left;
+  width: 300px;
+}
+
+ul.full {
+  width: 520px;
+}
+
+ul.xwide {
+  width: 500px;
+}
+
+ul.wide {
+  width: 370px;
+}
+
+ul.thin {
+  width: 180px;
+}
+
+ul.thinner {
+  width: 160px;
+}
+
+ul.cssonly {
+  width: 80px;
+}
+
+ul.small {
+  line-height: 1em;
+  font-size: 0.9em;
+}
+
+li {
+  padding: 10px 0;
+}
+
+.caption {
+  margin: 0;
+  color: #666;
+  font-size: 0.9em;
+}
+
+.caption a {
+  border-bottom: 1px solid #666;
+}
+
+/* The slides... */
+.slide.intro {
+    background: url(../img/intro-slide-background.jpg) no-repeat top left;
+}
+
+.intro h1,
+.intro h2 {
+  position: relative;
+  transform: rotate(-0.5deg);
+  -webkit-transform: rotate(-0.5deg);
+  -moz-transform: rotate(-0.5deg);
+  text-align: center;
+  -webkit-text-stroke: 1px black;
+}
+
+.intro h1 {
+  top: 270px;
+  left: 240px;
+  width: 700px;
+}
+
+.intro h2 {
+  top: 400px;
+  left: 240px;
+  width: 700px;
+}
+
+.webrtcdemo {
+
+}
+
+.webrtcdemo canvas {
+  /* XXX Hack to overcome problem with canvas size - trying to get it to end up being 1024x768 */
+  /* Fudged for Chrome Canary - bound to break in any other browser */
+  width: 1638px;
+  height: 1229px;
+  margin-left: -614px;
+}
+
 #debugCanvas {
-    float: right;
+  display: none;
 }
