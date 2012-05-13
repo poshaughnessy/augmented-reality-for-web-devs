@@ -48,7 +48,7 @@ body {
   height: 768px;
   left: 0;
   top: 0;
-  background: #000;
+  background: #000 url(../img/background-flickr-mattgarrett.jpg) no-repeat top left;
   -webkit-transition: margin 0.25s ease-in-out;
   -moz-transition: margin 0.25s ease-in-out;
   -o-transition: margin 0.25s ease-in-out;
@@ -440,6 +440,7 @@ ol {
   padding-left: 20px;
   font-size: 2.5em;
   text-align: left;
+  text-shadow: 1px 1px 1px #1b5d94;
 }
 
 li {
