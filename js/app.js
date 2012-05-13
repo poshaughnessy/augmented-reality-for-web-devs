@@ -155,17 +155,22 @@
         scene.add(camera);
 
         loader = new THREE.JSONLoader();
-        loader.load( 'models/monster.js', function(geometry) {
+        //loader.load( 'models/monster.js', function(geometry) {
+        loader.load( 'models/trex.js', function(geometry) {
 
             var faceMaterial = new THREE.MeshFaceMaterial();
 
             model = new THREE.Mesh(geometry, faceMaterial);
 
-            model.scale.set(10, 10, 10);
+            model.scale.set(6, 6, 6);
 
-            model.position.set(0, 0, -50);
+            //model.rotation.z = Math.PI;
+            model.rotation.x = -Math.PI / 2;
+            model.rotation.y = Math.PI / 2;
 
-            scene.add( model );
+            //model.position.set(0, 0, -50);
+
+            //scene.add( model );
 
         });
 
@@ -289,9 +294,10 @@
             //console.log('m.model', m.model);
 
             // If 3D model not created yet?
-            if( !m.model ) {
+            //if( !m.model ) {
+            if( !m.model && model != undefined ) {
 
-                console.log('Create cube');
+                //console.log('Set marker model');
 
                 m.model = new THREE.Object3D();
 
@@ -300,12 +306,17 @@
                     new THREE.MeshLambertMaterial({color: 0|(0xffffff*Math.random())})
                 );
 
-                cube.position.z = -50;
-                cube.doubleSided = true;
+                //cube.position.z = -50;
+                //cube.doubleSided = true;
+
+                //model.position.z = -50;
 
                 m.model.matrixAutoUpdate = false;
 
-                m.model.add(cube);
+                //m.model.add(cube);
+                m.model.add(model);
+
+                //console.log('Adding to scene:', m.model);
 
                 scene.add(m.model);
             }
