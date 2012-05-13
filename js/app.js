@@ -91,9 +91,10 @@
     var setUpCanvases = function() {
 
         canvas = document.createElement('canvas');
+        canvas.id = 'standardCanvas'; // Just for debugging
         canvas.width = CANVAS_WIDTH;
         canvas.height = CANVAS_HEIGHT;
-        //canvas.style.display = 'block';
+        canvas.style.display = 'none';
         document.body.appendChild(canvas);
 
         canvasContext = canvas.getContext('2d');
@@ -102,7 +103,7 @@
         console.log('set up video canvas');
 
         videoCanvas = document.createElement('canvas');
-        videoCanvas.id = 'videoCanvas';
+        videoCanvas.id = 'videoCanvas'; // Just for debugging
         videoCanvas.width = CANVAS_WIDTH;
         videoCanvas.height = CANVAS_HEIGHT;
 
@@ -162,7 +163,7 @@
 
             model.scale.set(10, 10, 10);
 
-            model.position.set(0, 0, 0);
+            model.position.set(0, 0, -50);
 
             scene.add( model );
 
