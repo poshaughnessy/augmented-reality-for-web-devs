@@ -1,7 +1,7 @@
 /**
 * See licence info in index.html
 */
-var Main = function() {
+(function() {
     var doc = document;
     var disableBuilds = true;
 
@@ -154,24 +154,6 @@ var Main = function() {
         c.className = 'counter';
         this._node.appendChild(c);
       },
-      // Added by Peter O'Shaughnessy
-      _makeSlideStepCounter: function() {
-        if(!this._count || !this._node) { return; }
-
-        var whatsThis = $(this);
-
-        var addables = $('.addable', this._node).length;
-        var switchables = $('.switchable', this._node).length;
-
-        var stepsCount = addables + switchables + 1;
-
-        // Remove one if a switcher inside an adder
-        stepsCount = stepsCount - $('.contentAdder .contentSwitcher', this._node).length;
-
-        var slideStepsHtml = $('<span class="slidesteps"><span class="slidestepnumber">1</span> of <span class="slidesteptotal">'+stepsCount+'</span></span>');
-
-        this._node.appendChild(slideStepsHtml[0]);
-      },
       _makeBuildList: function() {
         this._buildList = [];
         if (disableBuilds) { return; }
@@ -270,6 +252,8 @@ var Main = function() {
             this._slides[x-4].setState(Math.max(0, x-this.current));
           }
         }
+        // Added by Peter
+        //updateSlideSizeAndPositions();
       },
 
       current: 0,
@@ -349,11 +333,38 @@ var Main = function() {
       }
     };
 
+
+    /* For dynamic slide sizing - leaving for now - messes up positioning of elements on the slides */
+    /*
+    var updateSlideSizeAndPositions = function() {
+
+        var windowWidth = window.innerWidth;
+        var windowHeight = window.innerHeight;
+
+        console.log('Window width:', windowWidth);
+        console.log('Window height:', windowHeight);
+
+        var newSlideWidth = Math.max(windowWidth, 1024);
+        var newSlideHeight = Math.max(windowHeight, 768);
+
+        $('.slide').css('width',newSlideWidth+'px');
+        $('.slide').css('height',newSlideHeight+'px');
+
+        $('.slide.far-past').css('margin-left', -(newSlideWidth*2)+'px');
+        $('.slide.past').css('margin-left', -(newSlideWidth)+'px');
+        $('.slide.current').css('margin-left', '0px');
+        $('.slide.future').css('margin-left', (newSlideWidth)+'px');
+        $('.slide.far-future').css('margin-left', (newSlideWidth*2)+'px');
+
+    };
+     */
+
     // Initialize
     var slideshow = new SlideShow(query('.slide'));
-};
 
-
-$(function() {
-    new Main();
-});
+    /*
+    $(window).resize(function() {
+        updateSlideSizeAndPositions();
+    });
+    */
+})();

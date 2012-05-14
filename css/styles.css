@@ -130,14 +130,20 @@ h2 {
   font-size: 3em;
   font-weight: bold;
   padding: 0;
-  margin: 0;
+  margin: 30px 0 0 0;
   text-shadow: 1px 1px 1px #1b5d94;
+  width: 100%;
 }
 
 section, footer {
   font-family: 'Arial';
   text-shadow: rgba(0, 0, 0, 0.2) 0 2px 5px;
   display: block;
+}
+
+section {
+  width: 100%;
+  height: 100%;
 }
       
 footer {
@@ -191,19 +197,35 @@ figure {
   margin: 0;
   padding: 0;
   position: relative;
+  height: 100%;
 }
 
 figcaption {
   margin: 0;
   color: #fff;
-  font-size: 0.9em;
+  font-size: 0.8em;
   z-index: 1;
   position: absolute;
   bottom: 5px;
   right: 10px;
   text-align: right;
+  width: 100%;
 }
 
+figcaption .left {
+  position: absolute;
+  display: block;
+  left: 15px;
+  text-align: left;
+}
+
+figcaption.bothsides {
+  right: 30px;
+}
+
+figcaption.bothsides .left {
+  left: 50px;
+}
 
 h2.top {
   height: 100px;
@@ -223,10 +245,25 @@ h2.central {
   margin-top: 30%;
 }
 
+.twocols {
+  margin-top: 120px;
+}
+
+.twocols .left {
+  width: 50%;
+  float: left;
+}
+
+.twocols .right {
+  width: 50%;
+  margin-left: 50%;
+}
+
 /* Slide-specific styles */
 
 .slide.intro {
-    background: url(../img/intro-slide-background.jpg) no-repeat top left;
+  background: url(../img/intro-slide-background.jpg) no-repeat top left;
+  /*background-size: 100% 100%;*/
 }
 
 .intro h1,
@@ -255,6 +292,26 @@ h2.central {
 
 .what-ar-is h2 {
   font-size: 2.5em;
+}
+
+.location-based-ar figcaption {
+  position: relative;
+  top: -30px;
+  width: 560px;
+  margin: 0 auto;
+  text-align: right;
+  right: auto;
+}
+
+.qrcode-race h3 {
+  font-size: 2.8em;
+  padding-top: 120px;
+  text-align: left;
+}
+
+.ar-on-the-go img,
+.ar-in-the-home img {
+  margin-top: 80px;
 }
 
 .webrtcdemo canvas {
