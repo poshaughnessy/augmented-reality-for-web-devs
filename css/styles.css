@@ -214,8 +214,9 @@ h2.top {
 h2.bottom {
   height: 100px;
   line-height: 100px;
-  bottom: 40px;
+  bottom: 30px;
   position: absolute;
+  text-align: center;
 }
 
 h2.central {
@@ -250,10 +251,6 @@ h2.central {
   top: 400px;
   left: 250px;
   width: 700px;
-}
-
-.what-ar-is img {
-  margin-top: 50px;
 }
 
 .what-ar-is h2 {
