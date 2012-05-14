@@ -1,6 +1,9 @@
 Slides for London Web talk, 17th May 2012
 -----------------------------------------
 
+By Peter O'Shaughnessy
+
+
 
 To Do List
 ----------
@@ -10,3 +13,28 @@ To Do List
  - Add sound (monster/dinosaur roar) - DONE
  - Animate loading bar on first slide
  - Gamepad API to control slides
+
+
+Thank yous & Licence Information
+--------------------------------
+
+Libraries:
+
+ - Based on HTML5 Rocks Slides - Apache License 2
+ - JQuery - MIT / GPL v2 License
+ - Three.js - MIT License
+ - JSARToolit - GPL v3+
+ - hasAttr.js - Brian Martin - MIT / GPL License
+
+Media:
+
+ - Background image by Flickr user mattgarrett -  Creative Commons
+ - 'Real World. With Added Value' image by Flickr user turkletom - Creative Commons
+ - QR code image from wtfqrcodes.com (http://wtfqrcodes.com/tagged/plushie)
+ - Google Project Glass photos from Google via their Google+ page
+ - 'The Future of Augmented Reality' from Hidden Creative - used with permission
+ - 'Augmented (Hyper)Reality' by Keiichi Matsuda - used with permission
+ - Wikitude ARchitect images from Wikitude
+ - Protothon Ping Pong images from Protothon.com blog
+ - Stegosaurus model copyright DK
+
