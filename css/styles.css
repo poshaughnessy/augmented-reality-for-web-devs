@@ -41,9 +41,10 @@ body {
   text-align: center;
   width: 1024px;
   height: 768px;
-  left: 0;
-  top: 0;
-  background: #000 url(../img/background-flickr-mattgarrett.jpg) no-repeat top left;
+  left: 50%;
+  top: 50%;
+  margin-top: -384px;
+  background: #000 url(../img/background-with-gradient.jpg) no-repeat top left;
   -webkit-transition: margin 0.25s ease-in-out;
   -moz-transition: margin 0.25s ease-in-out;
   -o-transition: margin 0.25s ease-in-out;
@@ -91,24 +92,24 @@ body {
 .slide.past {
   visibility: visible;
   display: block;
-  margin-left: -1024px;
+  margin-left: -1536px;
 }
       
 .slide.current {
   visibility: visible;
   display: block;
-  margin-left: 0px;
+  margin-left: -512px;
 }
       
 .slide.future {
   visibility: visible;
   display: block;
-  margin-left: 1024px;
+  margin-left: 512px;
 }
       
 .slide.far-future {
   display: block;
-  margin-left: 2048px;
+  margin-left: 1536px;
 }
 
 body.three-d div.slides {
@@ -130,7 +131,7 @@ h2 {
   font-size: 3em;
   font-weight: bold;
   padding: 0;
-  margin: 30px 0 0 0;
+  margin: 50px 0 0 0;
   text-shadow: 1px 1px 1px #1b5d94;
   width: 100%;
 }
@@ -285,7 +286,7 @@ h2.central {
 
 .intro h2 {
   font-size: 1.8em;
-  top: 400px;
+  top: 0px;
   left: 250px;
   width: 700px;
 }
