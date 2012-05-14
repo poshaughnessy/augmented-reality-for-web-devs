@@ -162,8 +162,7 @@ pre b {
 pre em {
   font-weight: normal;
   font-style: normal;
-  color: #18a600;
-  text-shadow: #18a600 0 0 1px;
+  color: #fff;
 }
 
 .hidden {
@@ -235,7 +234,11 @@ h2.central {
   margin-top: 25%;
 }
 
-h2.central.twolines {
+h2.central.oneline {
+  margin-top: 30%;
+}
+
+h2.central.threelines {
   margin-top: 20%;
 }
 
@@ -251,6 +254,10 @@ h2.central.twolines {
 .twocols .right {
   width: 50%;
   margin-left: 50%;
+}
+
+.smallimage {
+  padding-top: 100px;
 }
 
 /* Slide-specific styles */
