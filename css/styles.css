@@ -182,6 +182,10 @@ li {
   padding: 15px 0;
 }
 
+li:nth-child(even) {
+  color: #5398d2;
+}
+
 figure {
   margin: 0;
   padding: 0;
