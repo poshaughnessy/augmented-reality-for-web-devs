@@ -1,5 +1,12 @@
+@font-face {
+  font-family: 'Antic Slab';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Antic Slab'), local('AnticSlab-Regular'), url('../fonts/AnticSlab-Regular.ttf') format('truetype');
+}
+
 body {
-  font: 24px "Arial", Verdana, "Trebuchet MS", Georgia, sans-serif;
+  font: 24px "Arial", Helvetica, sans-serif;
   padding: 0;
   margin: 0;
   width: 100%;
@@ -182,7 +189,7 @@ li {
   padding: 15px 0;
 }
 
-li:nth-child(even) {
+li:nth-child(odd) {
   color: #5398d2;
 }
 
@@ -213,20 +220,23 @@ figcaption .left {
 }
 
 figcaption.bothsides {
-  right: 30px;
+  right: 25px;
 }
 
 figcaption.bothsides .left {
-  left: 50px;
+  left: 45px;
 }
 
 h2.top {
+  font-family: "Antic Slab", arial, helvetica, sans-serif;
   height: 100px;
   line-height: 100px;
   margin-top: 40px;
 }
 
 h2.bottom {
+  font-size: 2.2em;
+  font-weight: normal;
   height: 100px;
   line-height: 100px;
   bottom: 30px;
@@ -235,6 +245,7 @@ h2.bottom {
 }
 
 h2.central {
+  font-family: "Antic Slab", arial, helvetica, sans-serif;
   margin-top: 25%;
 }
 
@@ -303,10 +314,6 @@ h2.central.threelines {
   margin-top: 10px;
 }
 
-.what-ar-is h2 {
-  font-size: 2.5em;
-}
-
 .what-ar-is figcaption {
   bottom: 149px;
 }
@@ -322,6 +329,7 @@ h2.central.threelines {
 
 .qrcode-race h3 {
   font-size: 2.8em;
+  font-weight: normal;
   padding-top: 120px;
   text-align: left;
 }
