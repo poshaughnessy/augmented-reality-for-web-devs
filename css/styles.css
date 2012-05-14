@@ -5,6 +5,13 @@
   src: local('Arimo'), local('Arimo-Regular'), url('../fonts/Arimo/Arimo-Regular.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: 'Arimo Bold';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Arimo'), local('Arimo-Bold'), url('../fonts/Arimo/Arimo-Bold.ttf') format('truetype');
+}
+
 body {
   font: 24px "Arial", Helvetica, sans-serif;
   padding: 0;
@@ -187,10 +194,15 @@ ol {
 
 li {
   padding: 15px 0;
+  font-style: italic;
 }
 
 li:nth-child(odd) {
   color: #5398d2;
+}
+
+li span {
+  font-style: normal;
 }
 
 figure {
@@ -255,6 +267,13 @@ h2.central.oneline {
 
 h2.central.threelines {
   margin-top: 20%;
+}
+
+h2.left {
+  float: left;
+  width: 460px;
+  text-align: center;
+  margin-top: 100px;
 }
 
 .twocols {
@@ -357,3 +376,15 @@ h2.central.threelines {
   float: left;
 }
 
+.future-will-be-augmented {
+  background: url(../img/google-glasses-2.jpeg) no-repeat top left;
+}
+
+.future-will-be-augmented h2 {
+  color: #333;
+  text-shadow: none;
+}
+
+.future-will-be-augmented h2 strong {
+  font-family: "Arimo Bold", arial, helvetica, sans-serif;
+}
