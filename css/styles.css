@@ -1,8 +1,8 @@
 @font-face {
-  font-family: 'Antic Slab';
+  font-family: 'Arimo';
   font-style: normal;
   font-weight: 400;
-  src: local('Antic Slab'), local('AnticSlab-Regular'), url('../fonts/AnticSlab-Regular.ttf') format('truetype');
+  src: local('Arimo'), local('Arimo-Regular'), url('../fonts/Arimo/Arimo-Regular.ttf') format('truetype');
 }
 
 body {
@@ -228,7 +228,7 @@ figcaption.bothsides .left {
 }
 
 h2.top {
-  font-family: "Antic Slab", arial, helvetica, sans-serif;
+  font-family: "Arimo", arial, helvetica, sans-serif;
   height: 100px;
   line-height: 100px;
   margin-top: 40px;
@@ -245,7 +245,7 @@ h2.bottom {
 }
 
 h2.central {
-  font-family: "Antic Slab", arial, helvetica, sans-serif;
+  font-family: "Arimo", arial, helvetica, sans-serif;
   margin-top: 25%;
 }
 
@@ -312,6 +312,10 @@ h2.central.threelines {
   left: 250px;
   width: 700px;
   margin-top: 10px;
+}
+
+.augma-what h2 em {
+  padding-right: 14px;
 }
 
 .what-ar-is figcaption {
