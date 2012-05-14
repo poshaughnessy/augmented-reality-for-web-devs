@@ -1,13 +1,12 @@
 Slides for London Web talk, 17th May 2012
 -----------------------------------------
 
-Augmented reality dinosaur
-
 
 To Do List
 ----------
 
- - Get AR Toolkit demo working
+ - Get AR Toolkit demo working - DONE
  - Build HTML slides
- - Add sound (monster/dinosaur roar)
+ - Add sound (monster/dinosaur roar) - DONE
  - Animate loading bar on first slide
+ - Gamepad API to control slides
