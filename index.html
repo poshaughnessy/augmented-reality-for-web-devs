@@ -163,8 +163,8 @@
                 <h2 class="central"><em>3.</em><br/>Wikitude ARchitect</h2>
             </div>
 
-            <div class="slide">
-                <img src="img/wikitude-architect-f1.jpg" width="1024"/>
+            <div class="slide wikitude-architect">
+                <img src="img/wikitude-architect.png" width="512"/>
             </div>
 
             <div class="slide">
@@ -222,19 +222,53 @@
 
      &lt;meta charset="utf-8"/>
      &lt;title>Hello AR!&lt;/title>
-     <em>&lt;!-- ARchitect framework - for the phone --&gt;</em>
+     <b>&lt;!-- ARchitect framework - for the phone --&gt;</b>
      &lt;script src="architect://architect.js">&lt;/script>
-     <em>&lt;!-- ARchitect Desktop Engine - for the desktop --&gt;</em>
+     <b>&lt;!-- ARchitect Desktop Engine - for the desktop --&gt;</b>
      &lt;script src="js/ade.js">&lt;/script>
 
  &lt;/head>
  &lt;body>
 
-     <em>&lt;!-- Transparent overlay on top of camera view --&gt;</em>
+     <b>&lt;!-- Transparent overlay on top of camera view --&gt;</b>
      &lt;h1>Hello AR!&lt;/h1>
 
  &lt;/body>
  &lt;/html>
+                </pre>
+            </div>
+
+            <div class="slide hello-ar-results">
+                <h2 class="top">Looks like this on desktop</h2>
+                <img src="img/hello-ar-desktop.png"/>
+                <h3 class="bottom">Pretty, huh?</h3>
+            </div>
+
+            <div class="slide hello-ar-results">
+                <h2 class="top">Looks like this on mobile</h2>
+                <img src="img/hello-ar-mobile.jpg"/>
+                <h3 class="bottom">Mmm, this app's nearly done!</h3>
+            </div>
+
+            <div class="slide adding-locations">
+                <h2 class="top">Adding locations</h2>
+                <pre>
+<b>AR.context.onLocationChanged</b> = function(lat, lon, alt, acc) {
+
+  <em>// Add a random location near to the user</em>
+
+  var objectLat = lat + ((Math.random()-0.5) / 1000);
+
+  var objectLong = lon + ((Math.random()-0.5) / 1000);
+
+  var geoLocation = new <b>AR.GeoLocation</b>(objectLat, objectLong);
+
+  var circle = new <b>AR.Circle</b>(5, {style: {fillColor: '#FF0000'}});
+
+  var geoObject = new <b>AR.GeoObject</b>(geoLocation,
+          {drawables: {cam: circle}});
+
+}
                 </pre>
             </div>
 
@@ -258,7 +292,10 @@
             </div>
 
             <div class="slide future-will-be-augmented">
-                <h2 class="left">The Future<br/><strong>will be</strong><br/>Augmented.</h2>
+                <figure>
+                    <h2 class="left">The Future<br/><strong>will be</strong><br/>Augmented.</h2>
+                    <figcaption>Find me on Twitter @poshaughnessy</figcaption>
+                </figure>
             </div>
 
         </div>

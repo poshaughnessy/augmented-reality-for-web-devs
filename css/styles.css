@@ -169,14 +169,14 @@ pre {
         
 pre b {
   font-weight: normal;
-  color: #c61800;
+  color: #fff;
   text-shadow: #c61800 0 0 1px;
 }
 
 pre em {
   font-weight: normal;
   font-style: normal;
-  color: #fff;
+  color: #aff7ff;
 }
 
 .hidden {
@@ -360,6 +360,19 @@ h2.left {
 .ar-on-the-go img,
 .ar-in-the-home img {
   margin-top: 80px;
+}
+
+.wikitude-architect img {
+  padding-top: 100px;
+}
+
+.hello-ar-results img {
+  padding: 40px 0 10px 0;
+}
+
+.adding-locations pre {
+  font-size: 1.05em;
+  margin-top: 2em;
 }
 
 .webrtcdemo canvas {
