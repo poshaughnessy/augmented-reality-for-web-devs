@@ -39,6 +39,7 @@
 -->
 <html>
 <head>
+    <title>AR for Web Devs</title>
     <script src="js/jquery-1.7.2.js"></script>
     <script src="js/JSARToolKit.js"></script>
     <script src="js/Three.js"></script>
@@ -238,16 +239,16 @@
                 </pre>
             </div>
 
-            <div class="slide hello-ar-results">
+            <div class="slide architect-results">
                 <h2 class="top">Looks like this on desktop</h2>
-                <img src="img/hello-ar-desktop.png"/>
+                <a href="http://dl.dropbox.com/u/37726670/architecttest/1.html" target="blank"><img src="img/hello-ar-desktop.png"/></a>
                 <h3 class="bottom">Pretty, huh?</h3>
             </div>
 
-            <div class="slide hello-ar-results">
+            <div class="slide architect-results">
                 <h2 class="top">Looks like this on mobile</h2>
                 <img src="img/hello-ar-mobile.jpg"/>
-                <h3 class="bottom">Mmm, this app's nearly done!</h3>
+                <h3 class="bottom">Nearly ready for the app store!</h3>
             </div>
 
             <div class="slide adding-locations">
@@ -255,7 +256,7 @@
                 <pre>
 <b>AR.context.onLocationChanged</b> = function(lat, lon, alt, acc) {
 
-  <em>// Add a random location near to the user</em>
+  <em>// Add a random point of interest near to the user</em>
 
   var objectLat = lat + ((Math.random()-0.5) / 1000);
 
@@ -269,6 +270,99 @@
           {drawables: {cam: circle}});
 
 }
+                </pre>
+            </div>
+
+            <div class="slide architect-results">
+                <h2 class="top">Looks like this on desktop</h2>
+                <a href="http://dl.dropbox.com/u/37726670/architecttest/2.html" target="blank"><img src="img/adding-locations-desktop.png"/></a>
+                <h3 class="bottom">Debugger's delight!</h3>
+            </div>
+
+            <div class="slide architect-results">
+                <h2 class="top">Looks like this on mobile</h2>
+                <img src="img/adding-locations-mobile.jpg"/>
+                <h3 class="bottom">AR at its finest!</h3>
+            </div>
+
+            <div class="slide custom-icons">
+                <h2 class="top">Let's add dinosaurs!</h2>
+                <pre>
+ var icon = new <b>AR.imageResource</b>('img/<em>dinosaur.png</em>',
+       {onLoaded: loadedIcon});
+
+ function loadedIcon() {
+
+   var drawable = new <b>AR.ImageDrawable</b>(icon, 4,
+         {enabled: true, triggers: {onClick: showCafe}});
+
+   var myGeoObject = new AR.GeoObject(myGeoLocation,
+         {drawables: {cam: drawable}});
+
+ }
+                </pre>
+                <img src="img/trex.png" height="250"/>
+            </div>
+
+            <div class="slide audio">
+                <h2 class="top">And make 'em noisy</h2>
+                <pre>
+var soundToStream = new <b>AR.Sound</b>('<em>tyrannosaurus-roar.mp3</em>',
+        {onError: errorLoadingSound,
+         onFinishedPlaying: finishedPlaying});
+
+soundToStream.<em>play</em>();
+
+
+var soundToPreload = new <b>AR.Sound</b>('<em>stegosaurus-stomp.mp3</em>',
+        {onError: errorLoadingSound,
+         onLoaded: readyToPlay,
+         onFinishedPlaying: finishedPlaying});
+
+soundToPreload.<em>load</em>();
+                </pre>
+            </div>
+
+            <div class="slide debugging">
+                <h2 class="top">Dinosaur debugging</h2>
+                <img src="img/debugging.jpg"/>
+                <pre>
+ <b>AR.logger.activateDebugMode</b>();
+
+ function finishedPlaying() {
+   <b>AR.logger.info</b>('Tada!');
+ }
+
+ function errorLoadingSound() {
+   <b>AR.logger.error</b>('Uh oh');
+ }
+                </pre>
+            </div>
+
+            <div class="slide next-steps">
+                <h2 class="top">&ldquo;I have a red circle & some dinosaurs...<br/>
+                <strong><em>Let's take it live!</em></strong>&rdquo;</h2>
+                <div class="twocols">
+                    <div class="left">
+                        <img src="img/wikitude-all-worlds.jpg" height="500"/>
+                    </div>
+                    <div class="right">
+                        <img src="img/xcode.jpg"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide native">
+                <h2 class="top">Uh oh, the native bit!</h2>
+                <pre>
+  @property (nonatomic, retain) <b>WTArchitectView</b> *arView;
+
+  ...
+
+  NSString *myWorldURL = [[NSBundle mainBundle]
+          pathForResource:@"<em>MyDinoWorld</em>" ofType:@"html"];
+
+  [self.arView <b>loadArchitectWorldFromUrl</b>:myWorldURL]
                 </pre>
             </div>
 
@@ -292,10 +386,14 @@
             </div>
 
             <div class="slide future-will-be-augmented">
-                <figure>
-                    <h2 class="left">The Future<br/><strong>will be</strong><br/>Augmented.</h2>
-                    <figcaption>Find me on Twitter @poshaughnessy</figcaption>
-                </figure>
+                <h2 class="left">The Future<br/><strong>will be</strong><br/>Augmented.</h2>
+            </div>
+
+            <div class="slide thankyou">
+                <h2>Thank you</h2>
+                <h3>Wikitude SDK 20% discount code: <div>KWNGLQ93</div></h3>
+                <p>Find me on Twitter @poshaughnessy</p>
+                <div class="caption">flickr.com/photos/dalton_mcdavid_reed</div>
             </div>
 
         </div>

@@ -277,7 +277,7 @@ h2.left {
 }
 
 .twocols {
-  margin-top: 120px;
+  margin-top: 80px;
 }
 
 .twocols .left {
@@ -357,6 +357,10 @@ h2.left {
   text-align: left;
 }
 
+.qrcode-race .twocols {
+  margin-top: 120px;
+}
+
 .ar-on-the-go img,
 .ar-in-the-home img {
   margin-top: 80px;
@@ -366,13 +370,46 @@ h2.left {
   padding-top: 100px;
 }
 
-.hello-ar-results img {
+.architect-results img {
   padding: 40px 0 10px 0;
 }
 
 .adding-locations pre {
   font-size: 1.05em;
   margin-top: 2em;
+}
+
+.custom-icons pre,
+.audio pre,
+.native pre {
+  margin-top: 2em;
+}
+
+.custom-icons img {
+  position: absolute;
+  right: 35px;
+  bottom: 5px;
+}
+
+.debugging img {
+  float: right;
+  padding-top: 1.5em;
+  margin-right: 20px;
+}
+
+.debugging pre {
+  padding-top: 3em;
+  font-size: 1.25em;
+}
+
+.next-steps h2 {
+  font-size: 2em;
+  line-height: 1.3em;
+}
+
+.next-steps h2 strong {
+  padding-right: 8px;
+  font-size:  1.2em;
 }
 
 .webrtcdemo canvas {
@@ -400,4 +437,49 @@ h2.left {
 
 .future-will-be-augmented h2 strong {
   font-family: "Arimo Bold", arial, helvetica, sans-serif;
+}
+
+.thankyou {
+  background: url(../img/thankyou.png) no-repeat top left;
+}
+
+.thankyou h2,
+.thankyou h3,
+.thankyou p {
+  text-align: left;
+  margin-left: 40px;
+  color: #fff;
+  text-shadow: 1px 1px 1px #1b5d94;
+  width: 500px;
+}
+
+.thankyou h2 {
+  margin-top: 2em;
+  font-size: 3.8em;
+}
+
+.thankyou h3 {
+  margin-top: 4em;
+}
+
+.thankyou h3 div {
+  font-size: 1.2em;
+  padding-top: 0.5em;
+}
+
+.thankyou p {
+  margin-top: 5em;
+  font-size: 1.1em;
+}
+
+.thankyou .caption {
+  margin: 0;
+  color: #fff;
+  font-size: 0.8em;
+  z-index: 1;
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+  text-align: right;
+  width: 100%;
 }
