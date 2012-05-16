@@ -225,6 +225,10 @@ figcaption,
   width: 100%;
 }
 
+figcaption.centre {
+  text-align: center;
+}
+
 figcaption .left {
   position: absolute;
   display: block;
@@ -275,6 +279,10 @@ h2.left {
   width: 460px;
   text-align: center;
   margin-top: 100px;
+}
+
+h2 small {
+  font-size: 0.7em;
 }
 
 .twocols {
@@ -371,6 +379,23 @@ h2.left {
   padding-top: 100px;
 }
 
+.wikitude-com h2 {
+  color: #ffb70a;
+  text-shadow: 1px 1px 1px #94841b;
+}
+
+.wikitude-how h2 {
+  letter-spacing:2px;
+}
+
+.amv h2 {
+  line-height: 1em;
+}
+
+.amv img {
+  margin-top: 80px;
+}
+
 .architect-results img {
   padding: 40px 0 10px 0;
 }
@@ -405,15 +430,33 @@ h2.left {
 
 .next-steps h2 {
   font-size: 2em;
-  line-height: 1.3em;
+  line-height: 1.4em;
 }
 
 .next-steps h2 strong {
   padding-right: 8px;
-  font-size:  1.2em;
+  font-size:  1.3em;
 }
 
-.webrtcdemo canvas {
+.opera-webcam img {
+  padding-top: 2em;
+}
+
+.opera-webcam figcaption {
+  bottom: 2em;
+}
+
+.vertical-images img {
+  display: block;
+  margin: 0 auto;
+  padding-top: 1em;
+}
+
+.vertical-images img:first-child {
+  padding-top: 2em;
+}
+
+.webrtc-demo canvas {
   /* XXX Hack to overcome problem with canvas size - trying to get it to end up being 1024x768 */
   /* Fudged for Chrome Canary - bound to break in any other browser */
   /*
@@ -423,8 +466,26 @@ h2.left {
   */
 }
 
-.webrtcdemo #debugCanvas {
+.webrtc-demo #debugCanvas {
   float: left;
+}
+
+.webrtc-code pre {
+  margin-top: 2em;
+}
+
+.webrtc-code-two pre {
+  margin-top: 1.5em;
+}
+
+.webrtc-code-three pre {
+  margin-top: 2em;
+}
+
+.tutorial h3 {
+  font-size: 2.4em;
+  margin: 0.4em 0;
+  color: #ffffff;
 }
 
 .future-will-be-augmented {

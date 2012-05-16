@@ -38,6 +38,7 @@
     window.DEBUG = true; // True means JSARToolkit will output to debugCanvas
 
     // For creating an object URL from the stream - for assigning the webcam stream to the video element
+    // createObjectURL creates a URI to a specified object
     var URL = window.URL || window.webkitURL;
     var createObjectURL = URL.createObjectURL || webkitURL.createObjectURL;
 
@@ -196,7 +197,7 @@
         videoScene.add(plane);
         videoScene.add(videoCam);
 
-        setInterval(updateScene, 33); // Updated every 33ms?
+        setInterval(updateScene, 33); // Updated every 33ms
 
     };
 

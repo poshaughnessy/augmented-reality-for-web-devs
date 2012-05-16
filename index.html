@@ -208,16 +208,21 @@
                 <h2 class="bottom">Field of view triggers</h2>
             </div>
 
-            <div class="slide">
-                <h2 class="central oneline">Let's get started</h2>
+            <div class="slide wikitude-how">
+                <h2 class="central oneline">&ldquo;How?&rdquo;</h2>
             </div>
 
-            <div class="slide">
-                <h2 class="central">AMV<br/><small>ARchitect Mobile Viewer</small></h2>
+            <div class="slide wikitude-com">
+                <h2 class="central oneline">wikitude.com</h2>
             </div>
 
             <div class="slide">
                 <h2 class="central oneline">ARchitect Tools</h2>
+            </div>
+
+            <div class="slide amv">
+                <h2 class="top">AMV<br/><small>ARchitect Mobile Viewer</small></h2>
+                <img src="img/architect-mobile-viewer.png" height="500"/>
             </div>
 
             <div class="slide">
@@ -329,7 +334,7 @@ soundToPreload.<em>load</em>();
             </div>
 
             <div class="slide debugging">
-                <h2 class="top">Dinosaur debugging</h2>
+                <h2 class="top">Debugging those dinos</h2>
                 <img src="img/debugging.jpg"/>
                 <pre>
  <b>AR.logger.activateDebugMode</b>();
@@ -345,8 +350,12 @@ soundToPreload.<em>load</em>();
             </div>
 
             <div class="slide next-steps">
-                <h2 class="top">&ldquo;I have a red circle & some dinosaurs...<br/>
-                <strong><em>Let's take it live!</em></strong>&rdquo;</h2>
+                <h2 class="central">&ldquo;I have a red circle & some dinosaurs...<br/>
+                <strong><em>Let's push it live!&rdquo;</em></strong></h2>
+            </div>
+
+            <div class="slide next-steps-two">
+                <h2 class="top">Decisions decisions...</h2>
                 <div class="twocols">
                     <div class="left">
                         <img src="img/wikitude-all-worlds.jpg" height="500"/>
@@ -375,11 +384,100 @@ soundToPreload.<em>load</em>();
                 <h2 class="central"><em>4.</em><br/>WebRTC</h2>
             </div>
 
-            <div class="slide webrtcdemo">
+            <div class="slide">
+                <img src="img/webcam.jpg" height="768"/>
+            </div>
+
+            <div class="slide opera-webcam">
+                <figure>
+                    <img src="img/opera-webcam.jpg" height="650"/>
+                    <figcaption class="centre">neave.com/webcam/html5</figcaption>
+                </figure>
+            </div>
+
+            <div class="slide vertical-images">
+                <figure>
+                    <img src="img/protothon1.png" width="550"/>
+                    <img src="img/protothon2.png" width="550"/>
+                    <figcaption class="bothsides">
+                        <span class="left">Protothon Ping Pong</span>
+                        <span class="right">http://bit.ly/protothon</span>
+                    </figcaption>
+                </figure>
+            </div>
+
+            <div class="slide">
+                <h2 class="central">WebRTC + JSARToolkit <br/> = AR on the Web</h2>
+            </div>
+
+            <div class="slide webrtc-demo">
                 <section>
                     <h2 class="top">Live In-Slides Demo!</h2>
                     <div id="webRTCDemo"></div>
                 </section>
+            </div>
+
+            <div class="slide webrtc-code">
+                <h2 class="top">Get User Media</h2>
+                <pre>
+  navigator.<b>getUserMedia</b>({video:true}, gotStream);
+
+  function gotStream(stream) {
+
+    <em>// Obtain a blob URL reference to the stream object</em>
+    var url = createObjectURL(stream);
+
+    <em>// And feed it into the video element</em>
+    video.src = url;
+
+  }
+                </pre>
+            </div>
+
+            <div class="slide webrtc-code-two">
+                <h2 class="top">JSARToolkit detector</h2>
+                <pre>
+  <em>// Draw video onto canvas</em>
+  <b>canvasContext</b>.drawImage(<b>video</b>, 0, 0, width, height);
+
+  <em>// Raster object reads image data from canvas</em>
+  <b>raster</b> = new NyARRgbRaster_Canvas2D(<b>canvas</b>);
+
+  <em>// Detection engine - detects multiple markers</em>
+  detector = new <b>FLARMultiIdMarkerDetector</b>(param, mWidth);
+
+  <em>// Gets number of detected markers</em>
+  var count = detector.<b>detectMarkerLite</b>(<b>raster</b>, thresh);
+
+  <em>// Get transformation matrix from specific marker</em>
+  detector.<b>getTransformMatrix</b>(index, resultMatrix);
+
+                </pre>
+            </div>
+
+            <div class="slide webrtc-code-three">
+                <h2 class="top">WebGL / Three.js</h2>
+                <pre>
+  loader = new THREE.<b>JSONLoader</b>();
+
+  loader.load( '<em>stegosaurus.js</em>', function(geometry) {
+
+    dino = new THREE.Mesh(geometry, material);
+
+  });
+
+  ...
+
+  var m = markers[i];
+  m.model.add(dino);
+                </pre>
+            </div>
+
+            <div class="slide tutorial">
+                <h2>Full tutorial @ HTML5 Rocks</h2>
+                <h3>bit.ly/jsartoolkit</h3>
+                <img src="img/html5-rocks.jpg" height="500"/>
+                <div class="caption">flickr.com/photos/hanok</div>
             </div>
 
             <div class="slide">
