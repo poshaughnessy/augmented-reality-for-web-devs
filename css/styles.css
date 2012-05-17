@@ -270,7 +270,8 @@ h2.central.oneline {
   margin-top: 30%;
 }
 
-h2.central.threelines {
+h2.central.threelines,
+h2.central.withimage {
   margin-top: 20%;
 }
 
@@ -379,6 +380,20 @@ h2 small {
 .ar-on-the-go img,
 .ar-in-the-home img {
   margin-top: 80px;
+}
+
+.langar-intro h2.central.withimage {
+  margin-top: 0;
+}
+
+.langar-intro img {
+  padding-top: 4em;
+  position: relative;
+  left: 60px;
+}
+
+.wikitude-intro img {
+  padding-top: 1em;
 }
 
 .wikitude-architect img {
