@@ -63,6 +63,10 @@
                 <h2 class="central oneline">&ldquo;Who are you?&rdquo;</h2>
             </div>
 
+            <div class="slide pearson">
+                <img src="img/pearson-logo.png" width="500"/>
+            </div>
+
             <div class="slide">
                 <h2 class="top">Coming Up:</h2>
                 <ol>
@@ -462,14 +466,14 @@ soundToPreload.<em>load</em>();
 
   loader.load( '<em>stegosaurus.js</em>', function(geometry) {
 
-    dino = new THREE.Mesh(geometry, material);
+    model = new THREE.Mesh(geometry, material);
 
   });
 
   ...
 
-  var m = markers[i];
-  m.model.add(dino);
+  scene.add(model);
+  model.matrix.setFromArray(transformMatrix);
                 </pre>
             </div>
 
@@ -494,8 +498,8 @@ soundToPreload.<em>load</em>();
             </div>
 
             <div class="slide thankyou">
-                <h2>Thank you</h2>
-                <h3>Wikitude SDK 20% discount code: <div>KWNGLQ93</div></h3>
+                <h2>And lastly...</h2>
+                <h3>Wikitude commercial SDK <br/> 20% discount code: <div>KWNGLQ93</div></h3>
                 <p>Find me on Twitter @poshaughnessy</p>
                 <div class="caption">flickr.com/photos/dalton_mcdavid_reed</div>
             </div>

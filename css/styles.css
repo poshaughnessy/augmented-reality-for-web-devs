@@ -342,6 +342,12 @@ h2 small {
   margin-top: 10px;
 }
 
+.pearson img {
+  display: block;
+  padding-top: 27%;
+  margin: 0 auto;
+}
+
 .augma-what h2 em {
   padding-right: 14px;
 }
@@ -517,7 +523,7 @@ h2 small {
 
 .thankyou h2 {
   margin-top: 2em;
-  font-size: 3.8em;
+  font-size: 3.4em;
 }
 
 .thankyou h3 {
