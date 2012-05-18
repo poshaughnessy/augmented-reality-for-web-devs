@@ -30,9 +30,6 @@ footer, header, hgroup, menu, nav, section {
 body {
   line-height: 1;
 }
-ol, ul {
-  list-style: none;
-}
 blockquote, q {
   quotes: none;
 }
@@ -341,7 +338,7 @@ pre em {
 ol {
   width: 50%;
   margin: 1em auto;
-  padding-left: 20px;
+  padding-left: 2%;
   font-size: 2.5em;
   text-align: left;
   text-shadow: 1px 1px 1px #1b5d94;
