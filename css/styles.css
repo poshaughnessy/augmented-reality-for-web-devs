@@ -502,7 +502,7 @@ h2 small {
 #windowSize {
   color: #fff;
   margin-top: 6%;
-  text-shadow: 1px 1px 1px #000;
+  text-shadow: 2px 2px 2px #000, -1px -1px -1px #000;
 }
 
 #windowWidth,
