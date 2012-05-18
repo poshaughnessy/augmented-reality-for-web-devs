@@ -39,9 +39,8 @@
 
     // For creating an object URL from the stream - for assigning the webcam stream to the video element
     // createObjectURL creates a URI to a specified object
-    var URL = window.URL || window.webkitURL;
-    var createObjectURL = URL.createObjectURL || webkitURL.createObjectURL;
-
+    var URL;
+    var createObjectURL;
 
     var getUserMedia = function(t, onsuccess, onerror) {
         if (navigator.getUserMedia) {
@@ -53,7 +52,7 @@
         } else if (navigator.msGetUserMedia) {
             return navigator.msGetUserMedia(t, onsuccess, onerror);
         } else {
-            onerror(new Error("No getUserMedia implementation found."));
+            onerror( giveUp() );
         }
     };
 
@@ -83,7 +82,7 @@
                 video.src = url;
             },
             function(error) {
-                alert("Couldn't access webcam.");
+                giveUp();
             }
         );
 
@@ -96,7 +95,7 @@
         canvas.width = CANVAS_WIDTH;
         canvas.height = CANVAS_HEIGHT;
         canvas.style.display = 'none';
-        $('#webRTCDemo').append(canvas);
+        $('#webRTCDemo .right').append(canvas);
 
         canvas2dContext = canvas.getContext('2d');
         canvas2dContext.font = "24px URW Gothic L, Arial, Sans-serif";
@@ -111,7 +110,7 @@
         debugCanvas.id = 'debugCanvas';
         debugCanvas.width = CANVAS_WIDTH;
         debugCanvas.height = CANVAS_HEIGHT;
-        $('#webRTCDemo').append(debugCanvas);
+        $('#webRTCDemo .left').append(debugCanvas);
     };
 
     var setUpJSARToolkit = function() {
@@ -172,7 +171,7 @@
         glCanvas.style.webkitTransform = 'scale(-1.0, 1.0)';
         glCanvas.width = CANVAS_WIDTH;
         glCanvas.height = CANVAS_HEIGHT;
-        $('#webRTCDemo').append(glCanvas);
+        $('#webRTCDemo .right').append(glCanvas);
 
         tmp = new Float32Array(16);
 
@@ -298,7 +297,35 @@
 
     };
 
+    var setUpCreateObjectURL = function() {
+
+        try {
+
+            URL = window.URL || window.webkitURL;
+
+            createObjectURL = URL.createObjectURL || webkitURL.createObjectURL;
+
+        } catch(err) {
+            return false;
+        }
+
+        return createObjectURL != undefined;
+
+    }
+
+    var giveUp = function() {
+
+        $('.cant-do-demo-message').show();
+        $('#webRTCDemo').hide();
+
+    }
+
     var init = function() {
+
+        if( !setUpCreateObjectURL() ) {
+            giveUp();
+            return;
+        }
 
         setUpVideoElement();
 

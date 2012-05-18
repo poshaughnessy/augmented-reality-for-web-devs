@@ -333,38 +333,20 @@
       }
     };
 
+    var updateResolutionMessage = function() {
 
-    /* For dynamic slide sizing - leaving for now - messes up positioning of elements on the slides */
-    /*
-    var updateSlideSizeAndPositions = function() {
+        $('#windowWidth').html(window.innerWidth);
+        $('#windowHeight').html(window.innerHeight);
 
-        var windowWidth = window.innerWidth;
-        var windowHeight = window.innerHeight;
-
-        console.log('Window width:', windowWidth);
-        console.log('Window height:', windowHeight);
-
-        var newSlideWidth = Math.max(windowWidth, 1024);
-        var newSlideHeight = Math.max(windowHeight, 768);
-
-        $('.slide').css('width',newSlideWidth+'px');
-        $('.slide').css('height',newSlideHeight+'px');
-
-        $('.slide.far-past').css('margin-left', -(newSlideWidth*2)+'px');
-        $('.slide.past').css('margin-left', -(newSlideWidth)+'px');
-        $('.slide.current').css('margin-left', '0px');
-        $('.slide.future').css('margin-left', (newSlideWidth)+'px');
-        $('.slide.far-future').css('margin-left', (newSlideWidth*2)+'px');
-
-    };
-     */
+    }
 
     // Initialize
-    var slideshow = new SlideShow(query('.slide'));
+    new SlideShow(query('.slide'));
 
-    /*
     $(window).resize(function() {
-        updateSlideSizeAndPositions();
+        updateResolutionMessage();
     });
-    */
+
+    updateResolutionMessage();
+
 })();

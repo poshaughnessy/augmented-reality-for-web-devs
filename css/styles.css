@@ -1,3 +1,52 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+/* End of CSS Reset */
+
 @font-face {
   font-family: 'Arimo';
   font-style: normal;
@@ -59,6 +108,7 @@ body {
   top: 50%;
   margin-top: -384px;
   background: #000 url(../img/background-with-gradient.jpg) no-repeat top left;
+  background-size: 100% 100%;
   -webkit-transition: margin 0.25s ease-in-out;
   -moz-transition: margin 0.25s ease-in-out;
   -o-transition: margin 0.25s ease-in-out;
@@ -100,7 +150,7 @@ body {
       
 .slide.far-past {
   display: block;
-  margin-left: -2048px;
+  margin-left: -2560px;
 }
 
 .slide.past {
@@ -126,6 +176,139 @@ body {
   margin-left: 1536px;
 }
 
+/* Responsive slide sizes */
+
+@media (min-width: 1152px) {
+  body {
+    font-size: 27px;
+  }
+  .slide {
+    width: 1152px;
+    height: 864px;
+    margin-top: -432px;
+  }
+  .slide.far-past {
+    margin-left: -2880px;
+  }
+  .slide.past {
+    margin-left: -1728px;
+  }
+  .slide.current {
+    margin-left: -576px;
+  }
+  .slide.future {
+    margin-left: 576px;
+  }
+  .slide.far-future {
+    margin-left: 1728px;
+  }
+}
+
+@media (min-width: 1280px) {
+  body {
+    font-size: 30px;
+  }
+  .slide {
+    width: 1280px;
+    height: 960px;
+    margin-top: -480px;
+  }
+  .slide.far-past {
+    margin-left: -2560px;
+  }
+  .slide.past {
+    margin-left: -1920px;
+  }
+  .slide.current {
+    margin-left: -640px;
+  }
+  .slide.future {
+    margin-left: 640px;
+  }
+  .slide.far-future {
+    margin-left: 1920px;
+  }
+}
+
+@media (min-width: 1440px) {
+  body {
+    font-size: 33.75px;
+  }
+  .slide {
+    width: 1440px;
+    height: 1080px;
+    margin-top: -540px;
+  }
+  .slide.far-past {
+    margin-left: -3600px;
+  }
+  .slide.past {
+    margin-left: -2160px;
+  }
+  .slide.current {
+    margin-left: -720px;
+  }
+  .slide.future {
+    margin-left: 720px;
+  }
+  .slide.far-future {
+    margin-left: 2160px;
+  }
+}
+
+@media (min-width: 1600px) {
+  body {
+    font-size: 37.5px;
+  }
+  .slide {
+    width: 1600px;
+    height: 1200px;
+    margin-top: -600px;
+  }
+  .slide.far-past {
+    margin-left: -4000px;
+  }
+  .slide.past {
+    margin-left: -2400px;
+  }
+  .slide.current {
+    margin-left: -800px;
+  }
+  .slide.future {
+    margin-left: 800px;
+  }
+  .slide.far-future {
+    margin-left: 2400px;
+  }
+}
+
+@media (min-width: 1920px) {
+  body {
+    font-size: 45px;
+  }
+  .slide {
+    width: 1920px;
+    height: 1440px;
+    margin-top: -720px;
+  }
+  .slide.far-past {
+    margin-left: -4800px;
+  }
+  .slide.past {
+    margin-left: -2880px;
+  }
+  .slide.current {
+    margin-left: -960px;
+  }
+  .slide.future {
+    margin-left: 960px;
+  }
+  .slide.far-future {
+    margin-left: 2880px;
+  }
+}
+
+
 body.three-d div.slides {
   -webkit-transform: scale(0.78);
   -moz-transform: scale(0.78);
@@ -145,7 +328,7 @@ h2 {
   font-size: 3em;
   font-weight: bold;
   padding: 0;
-  margin: 50px 0 0 0;
+  margin: 5% 0 0 0;
   text-shadow: 1px 1px 1px #1b5d94;
   width: 100%;
 }
@@ -308,7 +491,7 @@ h2 small {
 
 .slide.intro {
   background: url(../img/intro-slide-background.jpg) no-repeat top left;
-  /*background-size: 100% 100%;*/
+  background-size: 100% 100%;
 }
 
 .intro h1,
@@ -324,24 +507,37 @@ h2 small {
 }
 
 .intro h1 {
-  top: 270px;
-  left: 250px;
-  width: 700px;
+  top: 36%;
+  left: 24%;
+  width: 68%;
 }
 
 .intro h2 {
   font-size: 1.8em;
-  top: 0px;
-  left: 250px;
-  width: 700px;
-  margin-top: 380px;
+  left: 24%;
+  width: 68%;
+  margin-top: 38%;
 }
 
 .intro h3 {
-  left: 250px;
-  width: 700px;
+  left: 24%;
+  width: 68%;
   margin-top: 10px;
+  -webkit-text-stroke: 0;
+  text-shadow: 0;
 }
+
+#windowSize {
+  color: #fff;
+  margin-top: 6%;
+  text-shadow: 1px 1px 1px #000;
+}
+
+#windowWidth,
+#windowHeight {
+  color: #c5e4fe;
+}
+
 
 .pearson img {
   display: block;
@@ -354,7 +550,7 @@ h2 small {
 }
 
 .what-ar-is figcaption {
-  bottom: 149px;
+  bottom: 19.4%;
 }
 
 .location-based-ar figcaption {
@@ -414,11 +610,11 @@ h2 small {
 }
 
 .amv img {
-  margin-top: 80px;
+  margin-top: 10%;
 }
 
 .architect-results img {
-  padding: 40px 0 10px 0;
+  padding: 5% 0 2% 0;
 }
 
 .adding-locations pre {
@@ -477,14 +673,22 @@ h2 small {
   padding-top: 2em;
 }
 
+#webRTCDemo {
+  margin-top: 10%;
+}
+
+.webrtc-demo .left {
+  float: left;
+  width: 50%;
+}
+
+.webrtc-demo .right {
+  float: left;
+  width: 50%;
+}
+
 .webrtc-demo canvas {
-  /* XXX Hack to overcome problem with canvas size - trying to get it to end up being 1024x768 */
-  /* Fudged for Chrome Canary - bound to break in any other browser */
-  /*
-  width: 1638px;
-  height: 1229px;
-  margin-left: -614px;
-  */
+  float: right;
 }
 
 .webrtc-demo #debugCanvas {
@@ -503,6 +707,20 @@ h2 small {
   margin-top: 2em;
 }
 
+.cant-do-demo-message {
+  display: none;
+  margin-top: 10%;
+}
+
+.cant-do-demo-message h3 {
+  font-size: 1.2em;
+  margin-bottom: 1em;
+}
+
+.cant-do-demo-message a {
+  color: #fff;
+}
+
 .tutorial h3 {
   font-size: 2.4em;
   margin: 0.4em 0;
@@ -511,6 +729,7 @@ h2 small {
 
 .future-will-be-augmented {
   background: url(../img/google-glasses-2.jpeg) no-repeat top left;
+  background-size: 100% 100%;
 }
 
 .future-will-be-augmented h2 {
@@ -524,6 +743,7 @@ h2 small {
 
 .thankyou {
   background: url(../img/thankyou.png) no-repeat top left;
+  background-size: 100% 100%;
 }
 
 .thankyou h2,
