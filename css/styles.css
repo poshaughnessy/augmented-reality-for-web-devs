@@ -115,34 +115,6 @@ body {
   transition: margin 0.25s ease-in-out;
 }
 
-.slide p, .slide textarea {
-  font-size: 20px;
-}
-
-.slide .counter {
-  color: #999999;
-  position: absolute;
-  left: 20px;
-  bottom: 20px;
-  display: block;
-  font-size: 12px;
-}
-
-.slide.title > .counter,
-.slide.segue > .counter,
-.slide.mainTitle > .counter {
-  display: none;
-}
-
-.slide .slidesteps {
-  color: #999;
-  position: absolute;
-  right: 20px;
-  bottom: 20px;
-  display: block;
-  font-size: 12px;
-}
-
 .force-render {
   display: block;
   visibility: hidden;
@@ -460,7 +432,7 @@ h2.central.withimage {
 
 h2.left {
   float: left;
-  width: 460px;
+  width: 45%;
   text-align: center;
   margin-top: 100px;
 }
@@ -470,7 +442,7 @@ h2 small {
 }
 
 .twocols {
-  margin-top: 80px;
+  margin-top: 10%;
 }
 
 .twocols .left {
@@ -484,7 +456,7 @@ h2 small {
 }
 
 .smallimage {
-  padding-top: 100px;
+  padding-top: 13%;
 }
 
 /* Slide-specific styles */
@@ -522,7 +494,7 @@ h2 small {
 .intro h3 {
   left: 24%;
   width: 68%;
-  margin-top: 10px;
+  margin-top: 1%;
   -webkit-text-stroke: 0;
   text-shadow: 0;
 }
@@ -545,37 +517,22 @@ h2 small {
   margin: 0 auto;
 }
 
-.augma-what h2 em {
-  padding-right: 14px;
-}
-
 .what-ar-is figcaption {
   bottom: 19.4%;
 }
 
 .location-based-ar figcaption {
   position: relative;
-  top: -30px;
-  width: 560px;
+  top: -3%;
+  width: 55%;
   margin: 0 auto;
   text-align: right;
   right: auto;
 }
 
-.qrcode-race h3 {
-  font-size: 2.8em;
-  font-weight: normal;
-  padding-top: 120px;
-  text-align: left;
-}
-
-.qrcode-race .twocols {
-  margin-top: 120px;
-}
-
 .ar-on-the-go img,
 .ar-in-the-home img {
-  margin-top: 80px;
+  margin-top: 10%;
 }
 
 .langar-intro h2.central.withimage {
@@ -585,7 +542,7 @@ h2 small {
 .langar-intro img {
   padding-top: 4em;
   position: relative;
-  left: 60px;
+  left: 6%;
 }
 
 .wikitude-intro img {
@@ -593,7 +550,7 @@ h2 small {
 }
 
 .wikitude-architect img {
-  padding-top: 100px;
+  padding-top: 13%;
 }
 
 .wikitude-com h2 {
@@ -637,7 +594,7 @@ h2 small {
 .debugging img {
   float: right;
   padding-top: 1.5em;
-  margin-right: 20px;
+  margin-right: 2.6%;
 }
 
 .debugging pre {
@@ -651,7 +608,6 @@ h2 small {
 }
 
 .next-steps h2 strong {
-  padding-right: 8px;
   font-size:  1.3em;
 }
 
