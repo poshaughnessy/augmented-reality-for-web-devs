@@ -374,8 +374,8 @@ figcaption,
   font-size: 0.8em;
   z-index: 1;
   position: absolute;
-  bottom: 5px;
-  right: 10px;
+  bottom: 0.65%;
+  right: 1%;
   text-align: right;
   width: 100%;
 }
@@ -387,7 +387,7 @@ figcaption.centre {
 figcaption .left {
   position: absolute;
   display: block;
-  left: 15px;
+  left: 1.5%;
   text-align: left;
 }
 
@@ -402,16 +402,15 @@ figcaption.bothsides .left {
 h2.top {
   font-family: "Arimo", arial, helvetica, sans-serif;
   height: 100px;
-  line-height: 100px;
-  margin-top: 40px;
+  line-height: 13%;
+  margin-top: 5%;
 }
 
 h2.bottom {
   font-size: 2.2em;
   font-weight: normal;
-  height: 100px;
-  line-height: 100px;
-  bottom: 30px;
+  height: 13%;
+  bottom: 3%;
   position: absolute;
   text-align: center;
 }
