@@ -58,6 +58,13 @@ table {
   src: local('Arimo'), local('Arimo-Bold'), url('../fonts/Arimo/Arimo-Bold.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: 'Arimo Italic';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Arimo'), local('Arimo-Italic'), url('../fonts/Arimo/Arimo-Italic.ttf') format('truetype');
+}
+
 body {
   font: 24px "Arial", Helvetica, sans-serif;
   padding: 0;
@@ -415,6 +422,10 @@ h2.bottom {
 h2.central {
   font-family: "Arimo", arial, helvetica, sans-serif;
   margin-top: 25%;
+}
+
+h2.central em {
+  font-family: "Arimo Italic", arial, helvetica, sans-serif;
 }
 
 h2.central.oneline {
