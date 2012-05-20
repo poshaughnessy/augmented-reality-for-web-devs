@@ -317,6 +317,7 @@
 
         $('.cant-do-demo-message').show();
         $('#webRTCDemo').hide();
+        $('.webrtc-demo .instructions').hide();
 
     }
 

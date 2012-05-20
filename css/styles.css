@@ -338,6 +338,10 @@ pre em {
   color: #aff7ff;
 }
 
+a {
+  color: #fff;
+}
+
 .hidden {
   display: none;
 }
@@ -405,9 +409,7 @@ figcaption.bothsides .left {
 
 h2.top {
   font-family: "Arimo", arial, helvetica, sans-serif;
-  height: 100px;
-  line-height: 13%;
-  margin-top: 5%;
+  margin-top: 3%;
 }
 
 h2.bottom {
@@ -449,7 +451,7 @@ h2 small {
 }
 
 .twocols {
-  margin-top: 10%;
+  margin-top: 7%;
 }
 
 .twocols .left {
@@ -574,7 +576,7 @@ h2 small {
 }
 
 .amv img {
-  margin-top: 10%;
+  margin-top: 3%;
 }
 
 .architect-results img {
@@ -623,7 +625,7 @@ h2 small {
 }
 
 .opera-webcam figcaption {
-  bottom: 2em;
+  bottom: 3em;
 }
 
 .vertical-images img {
@@ -637,7 +639,8 @@ h2 small {
 }
 
 #webRTCDemo {
-  margin-top: 10%;
+  margin-top: 5%;
+  height: 386px;
 }
 
 .webrtc-demo .left {
@@ -670,6 +673,10 @@ h2 small {
   margin-top: 2em;
 }
 
+.webrtc-demo .instructions {
+  margin-top: 1.5em;
+}
+
 .cant-do-demo-message {
   display: none;
   margin-top: 10%;
@@ -678,10 +685,6 @@ h2 small {
 .cant-do-demo-message h3 {
   font-size: 1.2em;
   margin-bottom: 1em;
-}
-
-.cant-do-demo-message a {
-  color: #fff;
 }
 
 .tutorial h3 {
