@@ -1,18 +1,7 @@
-Slides for London Web talk, 17th May 2012
------------------------------------------
+Slides for my London Web talk, 17th May 2012
+--------------------------------------------
 
 By Peter O'Shaughnessy
-
-
-
-To Do List
-----------
-
- - Get AR Toolkit demo working - DONE
- - Build HTML slides
- - Add sound (monster/dinosaur roar) - DONE
- - Animate loading bar on first slide
- - Gamepad API to control slides
 
 
 Thank yous & Licence Information
@@ -41,3 +30,8 @@ Media:
  - Image of TRex on final slide from Flickr user dalton_mcdavid_reed - Creative Commons
  - Stegosaurus model copyright DK
  - Dinosaur roar sound from freesound.org (freesound.org/people/dag451/sounds/118336/) - Creative Commons
+ - Arimo font from Google Web Fonts Directory - SIL Open Font License
+
+
+Would you like to use this as a basis for you own slides? I don't see why not, but it'd be great to hear from you,
+so please send me a mail at: peter.oshaughnessy@pearson.com
