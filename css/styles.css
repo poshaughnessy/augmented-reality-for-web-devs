@@ -687,6 +687,10 @@ h2 small {
   margin-bottom: 1em;
 }
 
+.cant-do-demo-message h4 {
+  margin-bottom: 0.5em;
+}
+
 .tutorial h3 {
   font-size: 2.4em;
   margin: 0.4em 0;

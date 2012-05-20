@@ -43,16 +43,20 @@
     var createObjectURL;
 
     var getUserMedia = function(t, onsuccess, onerror) {
-        if (navigator.getUserMedia) {
-            return navigator.getUserMedia(t, onsuccess, onerror);
-        } else if (navigator.webkitGetUserMedia) {
-            return navigator.webkitGetUserMedia(t, onsuccess, onerror);
-        } else if (navigator.mozGetUserMedia) {
-            return navigator.mozGetUserMedia(t, onsuccess, onerror);
-        } else if (navigator.msGetUserMedia) {
-            return navigator.msGetUserMedia(t, onsuccess, onerror);
-        } else {
-            onerror( giveUp() );
+        try {
+            if (navigator.getUserMedia) {
+                return navigator.getUserMedia(t, onsuccess, onerror);
+            } else if (navigator.webkitGetUserMedia) {
+                return navigator.webkitGetUserMedia(t, onsuccess, onerror);
+            } else if (navigator.mozGetUserMedia) {
+                return navigator.mozGetUserMedia(t, onsuccess, onerror);
+            } else if (navigator.msGetUserMedia) {
+                return navigator.msGetUserMedia(t, onsuccess, onerror);
+            } else {
+                onerror( giveUp() );
+            }
+        } catch(ex) {
+            giveUp();
         }
     };
 
