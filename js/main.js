@@ -114,8 +114,6 @@
       if (this._node) {
         addClass(this._node, 'slide distant-slide');
       }
-      //this._makeCounter();
-      //this._makeSlideStepCounter(); // Added by Peter O'Shaughnessy
       this._makeBuildList();
     };
 
@@ -239,7 +237,6 @@
     SlideShow.prototype = {
       _slides: [],
       _update: function(dontPush) {
-        //document.querySelector('#presentation-counter').innerText = this.current;
         if (history.pushState) {
           if (!dontPush) {
             history.replaceState(this.current, 'Slide ' + this.current, '#slide' + this.current);
@@ -252,8 +249,6 @@
             this._slides[x-4].setState(Math.max(0, x-this.current));
           }
         }
-        // Added by Peter
-        //updateSlideSizeAndPositions();
       },
 
       current: 0,
