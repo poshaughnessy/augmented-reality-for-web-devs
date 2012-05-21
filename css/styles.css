@@ -154,6 +154,58 @@ body {
 
 /* Responsive slide sizes */
 
+@media (max-width: 799px) {
+  body {
+    font-size: 15px;
+  }
+  .slide {
+    width: 640px;
+    height: 480px;
+    margin-top: -240px;
+  }
+  .slide.far-past {
+    margin-left: -1600px;
+  }
+  .slide.past {
+    margin-left: -960px;
+  }
+  .slide.current {
+    margin-left: -320px;
+  }
+  .slide.future {
+    margin-left: 320px;
+  }
+  .slide.far-future {
+    margin-left: 960px;
+  }
+}
+
+@media (min-width: 800px) and (max-width: 1023px) {
+  body {
+    font-size: 18.75px;
+  }
+  .slide {
+    width: 800px;
+    height: 600px;
+    margin-top: -300px;
+  }
+  .slide.far-past {
+    margin-left: -2000px;
+  }
+  .slide.past {
+    margin-left: -1200px;
+  }
+  .slide.current {
+    margin-left: -400px;
+  }
+  .slide.future {
+    margin-left: 400px;
+  }
+  .slide.far-future {
+    margin-left: 1200px;
+  }
+}
+
 @media (min-width: 1152px) {
   body {
     font-size: 27px;
