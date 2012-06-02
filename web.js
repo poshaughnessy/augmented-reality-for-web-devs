@@ -3,7 +3,8 @@ var express = require('express');
 var app = express.createServer(express.logger());
 
 app.get('/', function(request, response) {
-    response.sendfile(__dirname + '/index.html');
+    response.send('coming soon');
+    //response.sendfile(__dirname + '/index.html');
 });
 
 app.configure(function() {
