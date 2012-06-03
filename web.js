@@ -13,6 +13,7 @@ app.configure(function() {
     app.use('/js', express.static(__dirname + '/js'));
     app.use('/media', express.static(__dirname + '/media'));
     app.use('/models', express.static(__dirname + '/models'));
+    app.use('/favicon.ico', express.static(__dirname + '/favicon.ico'));
 });
 
 var port = process.env.PORT || 8000;
