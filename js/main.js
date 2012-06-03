@@ -220,9 +220,12 @@
       doc.addEventListener('keydown',
           function(e) { _t.handleKeys(e); }, false);
       doc.addEventListener('touchstart',
-          function(e) { _t.handleTouchStart(e); }, false);
+          function(e) { _t.handleTouchStart(e); e.preventDefault(); }, false);
+      doc.addEventListener('touchmove',
+          function(e) { e.preventDefault(); }, false);
       doc.addEventListener('touchend',
           function(e) { _t.handleTouchEnd(e); }, false);
+      doc.ontouchmove = function(e){ e.preventDefault(); }
       window.addEventListener('popstate',
           function(e) { if (e.state) { _t.go(e.state); } }, false);
       this._update();

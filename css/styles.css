@@ -48,7 +48,7 @@ table {
   font-family: 'Arimo';
   font-style: normal;
   font-weight: 400;
-  src: local('Arimo'), local('Arimo-Regular'), url('../fonts/Arimo/Arimo-Regular.ttf') format('truetype');
+  src: local( 'Arimo'), local('Arimo-Regular'), url('../fonts/Arimo/Arimo-Regular.ttf') format('truetype');
 }
 
 @font-face {
@@ -184,7 +184,8 @@ body {
 */
 
 /* 640 x 480 */
-@media (min-width: 640px) and (max-width: 799px) {
+/*@media (min-width: 640px) and (max-width: 799px) {*/
+@media (max-width: 799px) {
   body {
     font-size: 15px;
   }
@@ -382,7 +383,7 @@ body.three-d div.slides {
             
 h1 {
   font-size: 3em;
-  font-weight: bold;
+  /*font-weight: bold;*/
   padding: 0;
   margin: 0;
   text-shadow: none;
@@ -390,7 +391,7 @@ h1 {
       
 h2 {
   font-size: 3em;
-  font-weight: bold;
+  /*font-weight: bold;*/
   padding: 0;
   margin: 5% 0 0 0;
   text-shadow: 1px 1px 1px #1b5d94;
@@ -571,7 +572,7 @@ h2 small {
   -webkit-transform: rotate(-0.5deg);
   -moz-transform: rotate(-0.5deg);
   text-align: center;
-  -webkit-text-stroke: 1px #000; /* #83c1f5; */
+  /*-webkit-text-stroke: 1px #000;*/
   text-shadow: 1px 1px 0px #000;
 }
 
