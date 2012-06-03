@@ -1,5 +1,6 @@
 /**
-* See licence info in index.html
+* From HTML5 Rocks
+* See header at top of index.html
 */
 (function() {
     var doc = document;
@@ -218,13 +219,6 @@
       var _t = this;
       doc.addEventListener('keydown',
           function(e) { _t.handleKeys(e); }, false);
-      /* Mouse wheel & scroll removed by Peter */
-      /*
-      doc.addEventListener('mousewheel',
-          function(e) { _t.handleWheel(e); }, false);
-      doc.addEventListener('DOMMouseScroll',
-          function(e) { _t.handleWheel(e); }, false);
-      */
       doc.addEventListener('touchstart',
           function(e) { _t.handleTouchStart(e); }, false);
       doc.addEventListener('touchend',

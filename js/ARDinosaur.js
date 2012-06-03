@@ -192,7 +192,6 @@
         // Next we need to make the Three.js camera use the FLARParam matrix.
         flarParam.copyCameraMatrix(tmp, 5, 5000);
         camera.projectionMatrix.setFromArray(tmp);
-        //camera.position.z = -500;
 
         videoTex = new THREE.Texture(videoCanvas);
 
@@ -241,7 +240,6 @@
         var detected = detector.detectMarkerLite(raster, DETECTOR_THRESHOLD);
 
         // Go through detected markers
-        // NB. It seems marker images do not need to be defined? It will recognise any image with thick black border?
         for( var idx = 0; idx < detected; idx++ ) {
 
             var id = detector.getIdMarkerData(idx);
