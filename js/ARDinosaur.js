@@ -1,12 +1,14 @@
-/* Based on HTML5 Rocks Demo by Ilmari Heikkinen */
-/* See: http://www.html5rocks.com/en/tutorials/webgl/jsartoolkit_webrtc/ */
-/* Refactored and adapted by Peter O'Shaughnessy */
+/*
+ * Based on HTML5 Rocks Demo by Ilmari Heikkinen
+ * See: http://www.html5rocks.com/en/tutorials/webgl/jsartoolkit_webrtc/
+ * Refactored and adapted by Peter O'Shaughnessy
+ */
 (function() {
 
     var DETECTOR_THRESHOLD = 128;
 
-    var CANVAS_WIDTH = 512; //640;
-    var CANVAS_HEIGHT = 386; //480;
+    var CANVAS_WIDTH = 512;
+    var CANVAS_HEIGHT = 386;
 
     var video;
     var canvas;
@@ -134,8 +136,6 @@
         // It detects multiple ID markers. ID markers are special markers that encode a number.
         detector = new FLARMultiIdMarkerDetector(flarParam, 120);
 
-        //console.log(detector);
-
         // For tracking video set continue mode to true. In continue mode, the detector
         // tracks markers across multiple frames.
         detector.setContinueMode(true);
@@ -149,12 +149,18 @@
         var light = new THREE.AmbientLight(0xcccccc);
         scene.add(light);
 
+        var spotlight = new THREE.SpotLight(0xcccccc);
+
+        spotlight.position.z = 1000;
+
+        scene.add(spotlight);
+
         // Create a camera and a marker root object for your Three.js scene.
         camera = new THREE.Camera();
         scene.add(camera);
 
         loader = new THREE.JSONLoader();
-        loader.load( 'models/steg.js', function(geometry) {
+        loader.load( 'models/GllimimusDinosaur.js', function(geometry) {
 
             var faceMaterial = new THREE.MeshFaceMaterial();
 
@@ -164,6 +170,10 @@
 
             model.rotation.x = -Math.PI / 2;
             model.rotation.y = Math.PI / 2;
+
+            // Centre the model
+            model.position.x = -100;
+            model.position.y = 10;
 
         });
 
@@ -182,6 +192,7 @@
         // Next we need to make the Three.js camera use the FLARParam matrix.
         flarParam.copyCameraMatrix(tmp, 5, 5000);
         camera.projectionMatrix.setFromArray(tmp);
+        //camera.position.z = -500;
 
         videoTex = new THREE.Texture(videoCanvas);
 
