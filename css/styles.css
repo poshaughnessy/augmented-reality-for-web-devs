@@ -155,6 +155,7 @@ body {
 /* Responsive slide sizes */
 
 /* 480 x 320 */
+/*
 @media (max-width: 639px) {
   body {
     font-size: 11px;
@@ -180,6 +181,7 @@ body {
     margin-left: 720px;
   }
 }
+*/
 
 /* 640 x 480 */
 @media (min-width: 640px) and (max-width: 799px) {
