@@ -154,37 +154,7 @@ body {
 
 /* Responsive slide sizes */
 
-/* 480 x 320 */
-/*
-@media (max-width: 639px) {
-  body {
-    font-size: 11px;
-  }
-  .slide {
-    width: 480px;
-    height: 360px;
-    margin-top: -180px;
-  }
-  .slide.far-past {
-    margin-left: -1200px;
-  }
-  .slide.past {
-    margin-left: -720px;
-  }
-  .slide.current {
-    margin-left: -240px;
-  }
-  .slide.future {
-    margin-left: 240px;
-  }
-  .slide.far-future {
-    margin-left: 720px;
-  }
-}
-*/
-
 /* 640 x 480 */
-/*@media (min-width: 640px) and (max-width: 799px) {*/
 @media (max-width: 799px) {
   body {
     font-size: 15px;
