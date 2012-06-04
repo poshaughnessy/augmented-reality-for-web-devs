@@ -574,7 +574,7 @@ h2 small {
   -moz-transform: rotate(-0.5deg);
   text-align: center;
   /*-webkit-text-stroke: 1px #000;*/
-  text-shadow: 1px 1px 0px #000;
+  text-shadow: 2px 2px 1px #000;
 }
 
 .intro h1 {
